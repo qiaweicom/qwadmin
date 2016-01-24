@@ -15,67 +15,50 @@ use Vendor\Database;
 use Qwadmin\Controller\ComController;
 
 class DatabaseController extends ComController{
+	
+	public function backup(){
+		$Db    = Db::getInstance();
+		$list  = $Db->query('SHOW TABLE STATUS');
+		$list  = array_map('array_change_key_case', $list);
+		$this->assign('list', $list);
+        $this->display();
+	}
+	
+	public function recovery(){
+		//判断目录是否存在
+		is_writeable($config['path']) || mkdir('./'.C("DB_PATH_NAME").'',0777,true);
+		//列出备份文件列表
+		$path = realpath(C('DB_PATH'));
+		$flag = \FilesystemIterator::KEY_AS_FILENAME;
+		$glob = new \FilesystemIterator($path,  $flag);
 
-    /**
-     * 数据库备份/还原列表
-     * @param  String $type import-还原，export-备份
-     */
-    public function index($type = null){
-		
-        switch ($type) {
-            /* 数据还原 */
-            case 'import':
-            	//判断目录是否存在
-            	is_writeable($config['path']) || mkdir('./'.C("DB_PATH_NAME").'',0777,true);
-                //列出备份文件列表
-                $path = realpath(C('DB_PATH'));
-                $flag = \FilesystemIterator::KEY_AS_FILENAME;
-                $glob = new \FilesystemIterator($path,  $flag);
+		$list = array();
+		foreach ($glob as $name => $file) {
+			if(preg_match('/^\d{8,8}-\d{6,6}-\d+\.sql(?:\.gz)?$/', $name)){
+				$name = sscanf($name, '%4s%2s%2s-%2s%2s%2s-%d');
 
-                $list = array();
-                foreach ($glob as $name => $file) {
-                    if(preg_match('/^\d{8,8}-\d{6,6}-\d+\.sql(?:\.gz)?$/', $name)){
-                        $name = sscanf($name, '%4s%2s%2s-%2s%2s%2s-%d');
+				$date = "{$name[0]}-{$name[1]}-{$name[2]}";
+				$time = "{$name[3]}:{$name[4]}:{$name[5]}";
+				$part = $name[6];
 
-                        $date = "{$name[0]}-{$name[1]}-{$name[2]}";
-                        $time = "{$name[3]}:{$name[4]}:{$name[5]}";
-                        $part = $name[6];
+				if(isset($list["{$date} {$time}"])){
+					$info = $list["{$date} {$time}"];
+					$info['part'] = max($info['part'], $part);
+					$info['size'] = $info['size'] + $file->getSize();
+				} else {
+					$info['part'] = $part;
+					$info['size'] = $file->getSize();
+				}
+				$extension        = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
+				$info['compress'] = ($extension === 'SQL') ? '-' : $extension;
+				$info['time']     = strtotime("{$date} {$time}");
 
-                        if(isset($list["{$date} {$time}"])){
-                            $info = $list["{$date} {$time}"];
-                            $info['part'] = max($info['part'], $part);
-                            $info['size'] = $info['size'] + $file->getSize();
-                        } else {
-                            $info['part'] = $part;
-                            $info['size'] = $file->getSize();
-                        }
-                        $extension        = strtoupper(pathinfo($file->getFilename(), PATHINFO_EXTENSION));
-                        $info['compress'] = ($extension === 'SQL') ? '-' : $extension;
-                        $info['time']     = strtotime("{$date} {$time}");
-
-                        $list["{$date} {$time}"] = $info;
-                    }
-                }
-				
-				$this->assign('nav',array('setting','database','import'));//导航
-                break;
-
-            /* 数据备份 */
-            case 'export':
-                $Db    = Db::getInstance();
-                $list  = $Db->query('SHOW TABLE STATUS');
-                $list  = array_map('array_change_key_case', $list);
-				$this->assign('nav',array('setting','database','export'));//导航
-                break;
-
-            default:
-                $this->error('参数错误！');
-        }
-
-        //渲染模板
-        $this->assign('list', $list);
-        $this->display($type);
-    }
+				$list["{$date} {$time}"] = $info;
+			}
+		}
+		$this->assign('list', $list);
+        $this->display();
+	}
 
     /**
      * 优化表

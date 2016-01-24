@@ -77,7 +77,7 @@ class MenuController extends ComController {
 		$data['pid'] = I('post.pid','','intval');
 		$data['title'] = I('post.title','','strip_tags');
 		$data['name'] = I('post.name','','strip_tags');
-		$data['icon'] = I('post.icon','','strip_tags');
+		$data['icon'] = I('post.icon');
 		$data['islink'] = I('post.islink','','intval');
 		$data['status'] = 1;
 		$data['o'] = I('post.o','','intval');
