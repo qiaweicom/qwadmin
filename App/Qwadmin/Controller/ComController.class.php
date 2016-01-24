@@ -26,7 +26,7 @@ class ComController extends BaseController {
 		$Auth  =   new Auth();
 		$allow_controller_name=array('Upload');//放行控制器名称
 		$allow_action_name=array('save','update','del');//放行函数名称
-		if(!$Auth->check(CONTROLLER_NAME.'/'.ACTION_NAME,$this->USER['uid'])&&!in_array(CONTROLLER_NAME,$allow_controller_name)&&!in_array(ACTION_NAME,$allow_action_name)){            
+		if($this->USER['uid']!=1&&!$Auth->check(CONTROLLER_NAME.'/'.ACTION_NAME,$this->USER['uid'])&&!in_array(CONTROLLER_NAME,$allow_controller_name)&&!in_array(ACTION_NAME,$allow_action_name)){            
 			$this->error('没有权限访问本页面!');
 		}
 		
