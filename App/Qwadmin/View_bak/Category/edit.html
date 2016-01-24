@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>分类管理-{$Think.CONFIG.title}</title>
+
+		<meta name="keywords" content="{$Think.CONFIG.keywords}" />
+		<meta name="description" content="{$Think.CONFIG.description}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="{$Think.CONFIG.URL}/Public/css/bootstrap.css" />
+		<link rel="stylesheet" href="{$Think.CONFIG.URL}/Public/css/font-awesome.css" />
+
+		<!-- page specific plugin styles -->
+
+		<!-- text fonts -->
+		<link rel="stylesheet" href="{$Think.CONFIG.URL}/Public/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="{$Think.CONFIG.URL}/Public/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="{$Think.CONFIG.URL}/Public/css/ace-part2.css" class="ace-main-stylesheet" />
+		<![endif]-->
+
+		<!--[if lte IE 9]>
+		  <link rel="stylesheet" href="{$Think.CONFIG.URL}/Public/css/ace-ie.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+		<script src="{$Think.CONFIG.URL}/Public/js/ace-extra.js"></script>
+
+		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+		<!--[if lte IE 8]>
+		<script src="{$Think.CONFIG.URL}/Public/js/html5shiv.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/respond.js"></script>
+		<![endif]-->
+	</head>
+
+	<body class="no-skin">
+		<include file="Public/header" />
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<include file="Public/sidebar" />
+			<div class="main-content">
+				<div class="main-content-inner">
+					<!-- #section:basics/content.breadcrumbs -->
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="ace-icon fa fa-home home-icon"></i>
+								<a href="{$Think.CONFIG.URL}/Qwadmin/">首页</a>
+							</li>
+
+							<li>
+								<a href="#">网站内容</a>
+							</li>
+							<li class="active">分类管理</li>
+						</ul><!-- /.breadcrumb -->
+					</div>
+
+					<!-- /section:basics/content.breadcrumbs -->
+					<div class="page-content">
+						<include file="Public/set" />
+
+						<!-- /section:settings.box -->
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+									<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-0"> 父类 </label>
+										<div class="col-sm-9">
+										<input name="id" id="id" value="{$currentcategory.id}" type="hidden">
+										<select id="pid" name="pid" class="col-xs-10 col-sm-5">
+											<option value="0">顶级分类</option>
+											{$category}
+										</select>
+										
+										<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">选择所属分类。</span>
+											</span>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 分类名称 </label>
+										<div class="col-sm-9">
+											<input type="text" name="name" id="name" placeholder="分类名称" class="col-xs-10 col-sm-5" value="{$currentcategory.name}">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">分类名称，不能为空。</span>
+											</span>
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 关键词 </label>
+										<div class="col-sm-9">
+											<input type="text" name="keywords" id="keywords" placeholder="关键词" class="col-xs-10 col-sm-5" value="{$currentcategory.keywords}">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">SEO关键词，建议用“,”隔开。</span>
+											</span>
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 栏目描述 </label>
+										<div class="col-sm-9">
+											<textarea name="description" id="description" placeholder="栏目描述" class="col-xs-10 col-sm-5" rows="5">{$currentcategory.description}</textarea>
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">栏目描述。</span>
+											</span>
+										</div>
+									</div>
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 排序 </label>
+										<div class="col-sm-9">
+											<input type="number" name="o" id="o" placeholder="排序" class="col-xs-10 col-sm-5" value="{$currentcategory.o}">
+											<span class="help-inline col-xs-12 col-sm-7">
+												<span class="middle">越小越靠前。</span>
+											</span>
+										</div>
+									</div>
+
+									<div class="col-md-offset-2 col-md-9">
+										<button class="btn btn-info" type="button">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+
+										&nbsp; &nbsp; &nbsp;
+										<button class="btn" type="reset">
+											<i class="icon-undo bigger-110"></i>
+											重置
+										</button>
+									</div>
+								</form>
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div>
+			</div><!-- /.main-content -->
+			<include file="Public/footer" />
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery1x.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+		</script>
+		<script src="{$Think.CONFIG.URL}/Public/js/bootstrap.js"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="{$Think.CONFIG.URL}/Public/js/bootbox.js"></script>
+
+		<!-- ace scripts -->
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.scroller.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.colorpicker.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.fileinput.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.typeahead.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.wysiwyg.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.spinner.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.treeview.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.wizard.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/elements.aside.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.ajax-content.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.touch-drag.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.sidebar.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.sidebar-scroll-1.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.submenu-hover.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.widget-box.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.settings.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.settings-rtl.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.settings-skin.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.widget-on-reload.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/js/ace/ace.searchbox-autocomplete.js"></script>
+		<!-- inline scripts related to this page -->
+		<script type="text/javascript">
+		$(function(){
+			$(".btn.btn-info").click(function(){
+				var pid = $("#pid").val();
+				var id = $("#id").val();
+				var name = $("#name").val();
+				var keywords = $("#keywords").val();
+				var description = $("#description").val();
+				var name = $("#name").val();
+				var o= $("#o").val();
+				if(name==''){
+					bootbox.dialog({
+						message: "抱歉，分类名称不能为空。", 
+						buttons: {
+							"success" : {
+								"label" : "确定",
+								"className" : "btn-danger"
+							}
+						}
+					});
+					return;
+				}
+				$.post("{:U('save')}", {id:id,pid:pid,name:name,keywords:keywords,description:description,o:o},
+					function(data){
+					if(data==1){
+						bootbox.dialog({  
+							message: "恭喜，数据提交成功。",  
+							title: "系统提示",  
+							buttons: {  
+								Cancel: {  
+									label: "查看",  
+									className: "btn-primary",  
+									callback: function () {  
+											window.location.href='{:U('index')}';
+									}  
+								}  
+								, OK: {  
+									label: "继续",  
+									className: "btn-primary",
+								}  
+							}  
+						});  
+						return;
+					}else{
+						bootbox.dialog({
+							message: "抱歉，系统错误，请稍后再试。", 
+							buttons: {
+								"success" : {
+									"label" : "确定",
+									"className" : "btn-danger"
+								}
+							}
+						});
+						return;
+					}
+				})
+
+			})
+		})
+		</script>
+	</body>
+</html>

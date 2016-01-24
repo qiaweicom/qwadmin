@@ -1,0 +1,48 @@
+<?php
+/**
+*
+* 版权所有：恰维网络<www.qiawei.com>
+* 作    者：寒川<admin@huikon.cn>
+* 日    期：2015-09-17
+* 版    本：1.0.0
+* 功能说明：后台公共文件。
+*
+**/
+
+/**
+*
+* 函数：日志记录
+* @param  string $log   日志内容。
+* @param  string $name （可选）用户名。
+*
+**/
+function addlog($log,$name=false){
+	$Model = M('log');
+	if(!$name){
+		$user = cookie('user');
+		$data['name'] = $user['user'];
+	}else{
+		$data['name'] = $name;
+	}
+	$data['t'] = time();
+	$data['ip'] = $_SERVER["REMOTE_ADDR"];
+	$data['log'] = $log;
+	$Model->data($data)->add();
+}
+
+
+/**
+*
+* 函数：获取用户信息
+* @param  int $uid      用户ID。
+* @param  string $name  数据列（如：'uid'、'uid,user'）
+*
+**/
+function member($uid,$field=false) {
+	$model = M('Member');
+	if($field){
+		return $model ->field($field)-> where(array('uid'=>$uid)) -> find();
+	}else{
+		return $model -> where(array('uid'=>$uid)) -> find();
+	}
+}
