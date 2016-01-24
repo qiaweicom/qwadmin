@@ -36,7 +36,8 @@ class ComController extends BaseController {
 
 		$prefix = C('DB_PREFIX');
 		$m =  M();
-		$current = $m->query("SELECT s.id,s.pid,p.pid as ppid FROM {$prefix}auth_rule s left join {$prefix}auth_rule p on p.id=s.pid where s.name='".CONTROLLER_NAME.'/'.ACTION_NAME."'");
+		$current_action_name= ACTION_NAME=='edit'? "index":ACTION_NAME;
+		$current = $m->query("SELECT s.id,s.pid,p.pid as ppid FROM {$prefix}auth_rule s left join {$prefix}auth_rule p on p.id=s.pid where s.name='".CONTROLLER_NAME.'/'.$current_action_name."'");
 		$this->assign('current',$current[0]);
 		$UID=$this->USER['uid'];
 		$menu_access = $m->query("SELECT rules FROM {$prefix}auth_group g left join {$prefix}auth_group_access a on g.id=a.group_id where a.uid=$UID");

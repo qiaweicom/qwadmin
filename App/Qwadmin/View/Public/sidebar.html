@@ -64,17 +64,17 @@
 
 								<b class="arrow"></b>
 								<notempty name="vv.children">
-								<ul class="submenu">
-								<volist name="vv.children" id="vvv">
-									<li <if condition="$vvv['id'] eq $current['id']">class="active"</if>>
-										<a href="{:U($vvv['name'])}">
-											<i class="{$vvv.icon}"></i>
-											{$vvv.title}
-										</a>
-										<b class="arrow"></b>
-									</li>
-								</volist>
-								</ul>
+									<ul class="submenu">
+									<volist name="vv.children" id="vvv">
+										<li <if condition="$vvv['id'] eq $current['id']">class="active"</if>>
+											<a href="{:U($vvv['name'])}">
+												<i class="{$vvv.icon}"></i>
+												{$vvv.title}
+											</a>
+											<b class="arrow"></b>
+										</li>
+									</volist>
+									</ul>
 								</notempty>
 							</li>
 							
