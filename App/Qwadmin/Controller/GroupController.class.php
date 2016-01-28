@@ -84,8 +84,9 @@ class GroupController extends ComController {
 			$this->error('参数错误！');
 		}
 		//获取所有启用的规则
-		$rule = M('auth_rule')->field('id,title')->where('status=1')->select();
+		$rule = M('auth_rule')->field('id,pid,title')->where('status=1')->order('o asc')->select();
 		$group['rules'] = explode(',',$group['rules']);
+		$rule = $this->getMenu($rule);
 		$this->assign('rule',$rule);
 		$this->assign('group',$group);
 		$this->assign('nav',array('user','grouplist','addgroup'));//导航
@@ -95,7 +96,8 @@ class GroupController extends ComController {
 	public function add(){
 
 		//获取所有启用的规则
-		$rule = M('auth_rule')->field('id,title')->where('status=1')->select();
+		$rule = M('auth_rule')->field('id,pid,title')->where('status=1')->order('o asc')->select();
+		$rule = $this->getMenu($rule);
 		$this->assign('rule',$rule);
 		$this -> display();
 	}
