@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2016 年 01 月 28 日 12:56
+-- 生成日期: 2016 年 01 月 28 日 14:04
 -- 服务器版本: 5.1.63
 -- PHP 版本: 5.2.17p1
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `qw_auth_group` (
 --
 
 INSERT INTO `qw_auth_group` (`id`, `title`, `status`, `rules`) VALUES
-(1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54');
+(1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `qw_auth_rule` (
   `o` int(11) NOT NULL COMMENT '排序',
   `tips` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
 --
 -- 转存表中的数据 `qw_auth_rule`
@@ -159,7 +159,8 @@ INSERT INTO `qw_auth_rule` (`id`, `pid`, `name`, `title`, `icon`, `type`, `statu
 (51, 9, 'Database/export', '备分', '', 1, 1, '', 0, 0, ''),
 (52, 9, 'Database/optimize', '数据优化', '', 1, 1, '', 0, 0, ''),
 (53, 9, 'Database/repair', '修复表', '', 1, 1, '', 0, 0, ''),
-(54, 11, 'Update/updating', '升级安装', '', 1, 1, '', 0, 0, '');
+(54, 11, 'Update/updating', '升级安装', '', 1, 1, '', 0, 0, ''),
+(55, 48, 'Personal/update', '资料保存', '', 1, 1, '', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,8 @@ CREATE TABLE IF NOT EXISTS `qw_category` (
   `o` int(11) NOT NULL COMMENT '排序',
   PRIMARY KEY (`id`),
   KEY `fsid` (`pid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 -- --------------------------------------------------------
 
@@ -280,14 +282,14 @@ CREATE TABLE IF NOT EXISTS `qw_member` (
   `password` varchar(32) NOT NULL,
   `t` int(10) unsigned NOT NULL COMMENT '注册时间',
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `qw_member`
 --
 
 INSERT INTO `qw_member` (`uid`, `user`, `head`, `sex`, `birthday`, `phone`, `qq`, `email`, `password`, `t`) VALUES
-(1, 'admin', '/Public/attached/201601/1453389194.png', 1, 1420128000, '13800138000', '331349451', 'xieyanwei@qq.com', '66d6a1c8748025462128dc75bf5ae8d1', 1442505600);
+(1, 'admin', '/Public/attached/201601/1453389194.png', 1, 1420128000, '13800138000', '331349451', 'xieyanwei@qq.com', 'afb8841f088084d6906b79739bce0b99', 1442505600);
 
 -- --------------------------------------------------------
 
@@ -310,4 +312,4 @@ INSERT INTO `qw_setting` (`k`, `v`) VALUES
 ('title', 'QWADMIN'),
 ('keywords', '关键词一,关键词二'),
 ('description', '网站描述'),
-('footer', '2016&copy;恰维网络');
+('footer', '2016©恰维网络');
