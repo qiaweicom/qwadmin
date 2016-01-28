@@ -111,7 +111,6 @@ class MemberController extends ComController {
 		$this->assign('usergroup',$usergroup);
 
 		$this->assign('member',$member);
-		$this->assign('nav',array('user','userlist',''));//导航
 		$this -> display();
 	}
 	
@@ -152,53 +151,9 @@ class MemberController extends ComController {
 	
 	
 	public function add(){
-		
-		
+
 		$usergroup = M('auth_group')->field('id,title')->select();
 		$this->assign('usergroup',$usergroup);
-		
-		$this->assign('nav',array('user','userlist','adduser'));//导航
 		$this -> display();
 	}
-	
-	public function save(){
-		
-		$user = isset($_POST['user'])?trim($_POST['user']):'';
-		$password = isset($_POST['password'])?trim($_POST['password']):'';
-		$group_id = isset($_POST['group_id'])?intval($_POST['group_id']):0;
-		if($user==''){
-			$this->error('用户名不能为空。');
-		}
-		if(M('member')->where("user='$user'")->count()){
-			$this->error('用户名重复。');
-		}
-		if($password==''){
-			$this->error('密码不能为空。');
-		}
-		if($group_id==''){
-			$this->error('用户组不能为空。');
-		}
-		$head = I('post.head','','strip_tags');
-		if($head<>'') {
-			$data['head'] = $head;
-		}
-		$data['user'] = $user;
-		$data['password'] = password($password);
-		$data['sex'] = isset($_POST['sex'])?intval($_POST['sex']):0;
-		$data['birthday'] = isset($_POST['birthday'])?strtotime($_POST['birthday']):time();
-		$data['phone'] = isset($_POST['phone'])?trim($_POST['phone']):'';
-		$data['qq'] = isset($_POST['qq'])?trim($_POST['qq']):'';
-		$data['email'] = isset($_POST['email'])?trim($_POST['email']):'';
-		$data['t'] = time();
-		$uid = M('member')->data($data)->add();
-		if($uid){
-			M('auth_group_access')->data(array('uid'=>$uid,'group_id'=>$group_id))->add();
-			addlog('新增用户：'.$data['user']);
-			$this->success('恭喜，用户添加成功！');
-		}else{
-			$this->error('系统错误，请稍后再试。');
-		}
-	}
-	
-
 }

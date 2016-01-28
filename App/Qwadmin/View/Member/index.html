@@ -35,6 +35,7 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<div class="row">
 									<form class="form-inline" action="" method="get">
+										<a class="btn btn-info" href="{:U('add')}" value="">新增</a>
 										<label class="inline">用户搜索</label>
 										<select name="field" class="form-control">
 											<option value="user">用户名</option>
@@ -53,7 +54,6 @@
 												Search
 											</button>
 									</form>
-									
 								</div>
 								<div class="space-4"></div>
 								<div class="row">
@@ -102,10 +102,10 @@
 										</volist>
 										</tbody>
 									</table>
-									<div class="cf">
-										<input class="btn btn-info" type="button" value="删除">
-									</div>
 									</form>
+									<div class="cf">
+										<input id="submit" class="btn btn-info" type="button" value="删除">
+									</div>
 								{$page}
 								</div>
 								<!-- PAGE CONTENT ENDS -->
@@ -151,7 +151,7 @@
 					}
 				});
 			});
-			$(".btn-info").click(function(){
+			$("#submit").click(function(){
 				bootbox.confirm({
 					title: "系统提示",
 					message: "是否要删除所选用户？", 

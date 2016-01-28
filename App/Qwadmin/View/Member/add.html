@@ -33,7 +33,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-									<form class="form-horizontal" enctype="multipart/form-data" action="{:U('save')}" method="post">
+									<form class="form-horizontal" action="{:U('save')}" method="post">
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 用户名 </label>
 										<div class="col-sm-9">
@@ -175,8 +175,8 @@
 
 		<include file="Public/footerjs" />
 		<!-- inline scripts related to this page -->
-		<script src="{$Think.CONFIG.URL}/Public/js/date-time/bootstrap-datepicker.js"></script>
-		<script src="{$Think.CONFIG.URL}/Public/js/function.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/qwadmin/js/date-time/bootstrap-datepicker.js"></script>
+		<script src="{$Think.CONFIG.URL}/Public/qwadmin/js/function.js"></script>
 		<script type="text/javascript">
 		jQuery(function($){
 			$('#birthday').datepicker({

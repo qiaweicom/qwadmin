@@ -92,7 +92,7 @@
 									</div>
 
 									<div class="col-md-offset-2 col-md-9">
-										<button class="btn btn-info" type="button">
+										<button class="btn btn-info submit" type="button">
 											<i class="icon-ok bigger-110"></i>
 											提交
 										</button>
@@ -118,7 +118,7 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 		$(function(){
-			$(".btn.btn-info").click(function(){
+			$(".btn.btn-info.submit").click(function(){
 				var pid = $("#pid").val();
 				var id = $("#id").val();
 				var name = $("#name").val();
@@ -138,7 +138,7 @@
 					});
 					return;
 				}
-				$.post("{:U('save')}", {id:id,pid:pid,name:name,keywords:keywords,description:description,o:o},
+				$.post("{:U('update')}", {id:id,pid:pid,name:name,keywords:keywords,description:description,o:o},
 					function(data){
 					if(data==1){
 						bootbox.dialog({  

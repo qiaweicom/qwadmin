@@ -93,7 +93,7 @@
 									</div>
 									
 									<div class="col-md-offset-2 col-md-9">
-										<button class="btn btn-info" type="button">
+										<button id="submit" class="btn btn-info" type="button">
 											<i class="icon-ok bigger-110"></i>
 											提交
 										</button>
@@ -119,14 +119,14 @@
 		
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
-		$(".btn.btn-info").click(function(){
+		$("#submit").click(function(){
 			var sitename = $("#sitename").val();
 			var title = $("#title").val();
 			var keywords = $("#keywords").val();
 			var description = $("#description").val();
 			var footer = $("#footer").val();
 	
-			$.post("{$Think.CONFIG.URL}/Qwadmin/Setting/settingsave", {sitename:sitename,title:title,keywords:keywords,description:description,footer:footer},
+			$.post("{:U('update')}", {sitename:sitename,title:title,keywords:keywords,description:description,footer:footer},
 				function(data){
 					if(data==1){
 						bootbox.alert({  

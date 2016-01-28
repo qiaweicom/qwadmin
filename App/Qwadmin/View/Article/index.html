@@ -59,10 +59,10 @@
 									</volist>
 									</tbody>
 								</table>
-								<div class="cf">
-									<input class="btn btn-info" type="button" value="删除">
-								</div>
 								</form>
+								<div class="cf">
+									<input id="submit" class="btn btn-info" type="button" value="删除">
+								</div>
 								{$page}
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
@@ -92,7 +92,7 @@
 					}
 				});
 			});
-			$(".btn-info").click(function(){
+			$("#submit").click(function(){
 				bootbox.confirm({
 					title: "系统提示",
 					message: "是否要删除所选文章？", 

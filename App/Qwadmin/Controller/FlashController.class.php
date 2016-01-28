@@ -19,7 +19,6 @@ class FlashController extends ComController {
 		
 		$list = M('flash')->order('o asc')->select();
 		$this->assign('list',$list);
-		$this->assign('nav',array('tool','flash'));
 		$this -> display();
 	}
 	//新增焦点图
@@ -33,7 +32,6 @@ class FlashController extends ComController {
 		$id = intval($id);
 		$flash = M('flash')->where('id='.$id)->find();
 		$this->assign('flash',$flash);
-		$this->assign('nav',array('tool','flash'));
 		$this -> display();
 	}
 	//删除焦点图

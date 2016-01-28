@@ -158,7 +158,7 @@
 						if(json.result=='no'){
 							$("#upmsg").html("目前还没有适合您当前版本的更新！").removeClass();
 						}else if(json.result=='yes'){
-							$("#upmsg").html("检查到新版本 "+json.ver+"，请前往“系统设置”->“<a  href=\"{$Think.CONFIG.URL}/Qwadmin/Update/update.html\">在线升级</a>”").removeClass();
+							$("#upmsg").html("检查到新版本 "+json.ver+"，请前往“系统设置”->“<a  href=\"{:U('update')}\">在线升级</a>”").removeClass();
 						}
 					},
 					error: function(){

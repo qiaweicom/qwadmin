@@ -15,9 +15,6 @@ use Vendor\Tree;
 
 class ArticleController extends ComController {
 
-
-	
-	
 	public function add(){
 		
 		$category = M('category')->field('id,pid,name')->order('o asc')->select();
@@ -25,7 +22,6 @@ class ArticleController extends ComController {
 		$str = "<option value=\$id \$selected>\$spacer\$name</option>"; //生成的形式
 		$category = $tree->get_tree(0,$str,0);
 		$this->assign('category',$category);//导航
-		$this->assign('nav',array('article','addarticle'));//导航
 		$this -> display();
 	}
 		
@@ -50,7 +46,6 @@ class ArticleController extends ComController {
 		$page = $page->show();
         $this->assign('list',$list);	
         $this->assign('page',$page);
-		$this->assign('nav',array('article','articlelist'));//导航
 		$this -> display();
 	}
 	
@@ -89,14 +84,13 @@ class ArticleController extends ComController {
 			$this->assign('category',$category);//导航
 			
 			$this->assign('article',$article);
-			$this->assign('nav',array('article','articlelist'));//导航
 		}else{
 			$this->error('参数错误！');
 		}
 		$this -> display();
 	}
 	
-	public function save($aid=0){
+	public function update($aid=0){
 		
 		$aid = intval($aid);
 		$data['sid'] = isset($_POST['sid'])?intval($_POST['sid']):0;

@@ -15,11 +15,10 @@ use Qwadmin\Controller\ComController;
 class SettingController extends ComController {
     public function setting(){
 		
-		$this->assign('nav',array('setting','setting',''));//导航
 		$this -> display();
     }
 
-    public function settingsave(){
+    public function update(){
 		
 		$data['sitename'] = isset($_POST['sitename'])?strip_tags($_POST['sitename']):'';
 		$data['title'] = isset($_POST['title'])?strip_tags($_POST['title']):'';

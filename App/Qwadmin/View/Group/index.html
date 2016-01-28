@@ -51,7 +51,7 @@
 											</td>
 											<td>{$val['title']}</td>
 											<td><if condition="$val['status'] eq 1"><a href="" title="点击禁用">启用</a><else /><a href="" title="点击启用">启用</a></if></td>
-											<td class="center"><a href="{$Think.CONFIG.URL}/Qwadmin/group/edit.html?id={$val['id']}" >修改</a></td>
+											<td class="center"><a href="{:U('edit')}?id={$val['id']}" >修改</a></td>
 										</tr>
 									</volist>
 									</tbody>

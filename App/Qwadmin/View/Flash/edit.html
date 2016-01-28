@@ -82,7 +82,7 @@
 									</div>
 
 									<div class="col-md-offset-2 col-md-9">
-										<button class="btn btn-info" type="button">
+										<button class="btn btn-info submit" type="button">
 											<i class="icon-ok bigger-110"></i>
 											提交
 										</button>
@@ -108,7 +108,7 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 		$(function() {
-			$(".btn-info").click(function(){
+			$(".btn-info.submit").click(function(){
 				var webname = $("#webname").val();
 				var url = $("#url").val();
 				if(webname==0){
