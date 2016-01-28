@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>用户管理-{$Think.CONFIG.title}</title>
+		<title>{$current['title']}-{$Think.CONFIG.title}</title>
 
 		<meta name="keywords" content="{$Think.CONFIG.keywords}" />
 		<meta name="description" content="{$Think.CONFIG.description}" />
@@ -23,23 +23,7 @@
 			<div class="main-content">
 				<div class="main-content-inner">
 					<!-- #section:basics/content.breadcrumbs -->
-					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
-
-						<ul class="breadcrumb">
-							<li>
-								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="{$Think.CONFIG.URL}/Qwadmin/">首页</a>
-							</li>
-
-							<li>
-								<a href="#">用户管理</a>
-							</li>
-							<li class="active">用户列表</li>
-						</ul><!-- /.breadcrumb -->
-					</div>
+					<include file="Public/breadcrumbs" />
 
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
@@ -89,13 +73,25 @@
 											</tr>
 										</thead>
 										<tbody>
+										<style>
+											.grouptd{position:relative;}
+											.group{display:inline-block;width:100%;}
+											.groupselect{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+										</style>
 										<volist name="list" id="val">
 											<tr>
 												<td class="center">
 													<if condition="$val['uid'] neq 1"><input class="uids" type="checkbox" name="uids[]" value="{$val['uid']}"><else /><span title="系统管理员，禁止删除">--</span></if>
 												</td>
 												<td>{$val['user']}</td>
-												<td>{$val['title']}</td>
+												<td class="grouptd">
+													<span class="group" val="{$val['uid']}">{$val['title']}</span>
+													<select class="groupselect hide">
+													<volist name="group" id="v">
+														<option value="{$v.id}">{$v.title}</option>
+													</volist>
+													</select>
+												</td>
 												<td class="center"><?php if($val['sex']==1){echo '男';}elseif($val['sex']==2){echo '女';}else{echo '保密';} ?></td>
 												<td class="center">{$val['birthday']|date="Y-m-d",###}</td>
 												<td>{$val['phone']}</td>
@@ -126,6 +122,21 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 		$(function(){
+			$(".group").click(function(){
+				$(this).addClass('hide');
+				$(this).parent().find(".groupselect").removeClass('hide');
+			})
+			$(".groupselect").on("change",function(){
+				var ob = $(this);
+				var gid=ob.val();
+				var uid = ob.parent().find('.group').attr('val');
+				$.get("{:U('update')}?ajax=yes&uid="+uid+"&gid="+gid,function(data){
+					var text = ob.find("option:selected").text();
+					ob.parent().find(".group").removeClass('hide').html(text);
+					ob.addClass('hide');
+				 });
+			})
+			
 			$(".check-all").click(function(){
 				$(".uids").prop("checked", this.checked);
 			});

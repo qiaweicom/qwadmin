@@ -50,14 +50,16 @@ class MemberController extends ComController {
 		$offset = $pagesize*($p-1);//计算记录偏移量
 		$count = $user->count();
 		
-		$list  = $user->field("{$prefix}member.*,{$prefix}auth_group.title")->order($order)->join("{$prefix}auth_group_access ON {$prefix}member.uid = {$prefix}auth_group_access.uid")->join("{$prefix}auth_group ON {$prefix}auth_group.id = {$prefix}auth_group_access.group_id")->where($where)->limit($offset.','.$pagesize)->select();
-
+		$list  = $user->field("{$prefix}member.*,{$prefix}auth_group.id as gid,{$prefix}auth_group.title")->order($order)->join("{$prefix}auth_group_access ON {$prefix}member.uid = {$prefix}auth_group_access.uid")->join("{$prefix}auth_group ON {$prefix}auth_group.id = {$prefix}auth_group_access.group_id")->where($where)->limit($offset.','.$pagesize)->select();
+		
+		
 		//$user->getLastSql();
 		$page	=	new \Think\Page($count,$pagesize); 
 		$page = $page->show();
         $this->assign('list',$list);	
         $this->assign('page',$page);
-        $this->assign('nav',array('user','userlist',''));//导航
+		$group = M('auth_group')->field('id,title')->select();
+		$this->assign('group',$group);
 		$this -> display();
     }
 	
@@ -113,7 +115,13 @@ class MemberController extends ComController {
 		$this -> display();
 	}
 	
-	public function update(){
+	public function update($ajax=''){
+		if($ajax=='yes'){
+			$uid = I('get.uid',0,'intval');
+			$gid = I('get.gid',0,'intval');
+			M('auth_group_access')->data(array('group_id'=>$gid))->where("uid='$uid'")->save();
+			die('1');
+		}
 		
 		$uid = isset($_POST['uid'])?intval($_POST['uid']):false;
 		if(!$uid){
