@@ -88,7 +88,7 @@
 													<span class="group" val="{$val['uid']}">{$val['title']}</span>
 													<select class="groupselect hide">
 													<volist name="group" id="v">
-														<option value="{$v.id}">{$v.title}</option>
+														<option <if condition="$val['gid'] eq $v['id']">selected="selected"</if> value="{$v.id}">{$v.title}</option>
 													</volist>
 													</select>
 												</td>
