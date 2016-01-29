@@ -43,7 +43,7 @@ class GroupController extends ComController {
 		
 		$data['title'] = isset($_POST['title'])?trim($_POST['title']):false;
 		$id = isset($_POST['id'])?intval($_POST['id']):false;
-		if($data['title'] and $id){
+		if($data['title']){
 			$status = isset($_POST['status'])?$_POST['status']:'';
 			if($status == 'on'){
 				$data['status'] =1;
@@ -59,16 +59,22 @@ class GroupController extends ComController {
 				$rules = implode(',',$rules);
 			}
 			$data['rules'] = $rules;
-	
-			if($group = M('auth_group')->where('id='.$id)->data($data)->save()){
-				addlog('编辑用户组，ID：'.$id.'，组名：'.$data['title']);
-				$this->success('恭喜，用户组修改成功！');
-				exit(0);
+			if($id){
+				if($group = M('auth_group')->where('id='.$id)->data($data)->save()){
+					addlog('编辑用户组，ID：'.$id.'，组名：'.$data['title']);
+					$this->success('恭喜，用户组修改成功！');
+					exit(0);
+				}else{
+					$this->success('未修改内容');
+				}
 			}else{
-				$this->success('未修改内容');
+				M('auth_group')->data($data)->add();
+				addlog('新增用户组，ID：'.$id.'，组名：'.$data['title']);
+				$this->success('恭喜，新增用户组成功！');
+				exit(0);
 			}
 		}else{
-			$this->success('参数错误！');
+			$this->success('用户组名称不能为空！');
 		}
 	}
 	
