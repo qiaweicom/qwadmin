@@ -123,12 +123,10 @@ class MemberController extends ComController {
 		}
 		
 		$uid = isset($_POST['uid'])?intval($_POST['uid']):false;
-		if(!$uid){
-			$this->error('参数错误！');
-		}
+		$user = isset($_POST['user'])?htmlspecialchars($_POST['user'], ENT_QUOTES):'';
 		$group_id = isset($_POST['group_id'])?intval($_POST['group_id']):0;
-		if($group_id){
-			M('auth_group_access')->data(array('group_id'=>$group_id))->where("uid=$uid")->save();
+		if(!$group_id){
+			$this->error('请选择用户组！');
 		}
 		$password = isset($_POST['password'])?trim($_POST['password']):false;
 		if($password) {
@@ -143,9 +141,25 @@ class MemberController extends ComController {
 		$data['phone'] = isset($_POST['phone'])?trim($_POST['phone']):'';
 		$data['qq'] = isset($_POST['qq'])?trim($_POST['qq']):'';
 		$data['email'] = isset($_POST['email'])?trim($_POST['email']):'';
-		$Model = M('member');
-		$Model->data($data)->where("uid=$uid")->save();
-		addlog('编辑会员信息，会员UID：'.$uid);
+		if(!$uid){
+			if($user==''){
+				$this->error('用户名称不能为空！');
+			}
+			if(!$password){
+				$this->error('用户密码不能为空！');
+			}
+			if(M('member')->where("user='$user}'")->count()){
+				$this->error('用户名已被占用！');
+			}
+			$data['user'] = $user;
+			$uid = M('member')->data($data)->add();
+			M('auth_group_access')->data(array('group_id'=>$group_id,'uid'=>$uid))->add();
+			addlog('新增会员，会员UID：'.$uid);
+		}else{
+			M('auth_group_access')->data(array('group_id'=>$group_id))->where("uid=$uid")->save();
+			M('member')->data($data)->where("uid=$uid")->save();
+			addlog('编辑会员信息，会员UID：'.$uid);
+		}
 		$this->success('操作成功！');
 	}
 	
