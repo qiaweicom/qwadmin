@@ -15,11 +15,15 @@ use Qwadmin\Controller\ComController;
 class SettingController extends ComController {
     public function setting(){
 		
+		$vars = M('setting')->where('type=1')->select();
+		$this->assign('vars',$vars);
+		
 		$this -> display();
     }
 
     public function update(){
-		
+
+		$data = $_POST;
 		$data['sitename'] = isset($_POST['sitename'])?strip_tags($_POST['sitename']):'';
 		$data['title'] = isset($_POST['title'])?strip_tags($_POST['title']):'';
 		$data['keywords'] = isset($_POST['keywords'])?strip_tags($_POST['keywords']):'';
@@ -30,6 +34,6 @@ class SettingController extends ComController {
 			$Model->data(array('v'=>$v))->where("k='{$k}'")->save();
 		}
 		addlog('修改网站配置。');
-		die('1');
+		$this->success('恭喜，网站配置成功！');
     }
 }

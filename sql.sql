@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `qw_auth_group` (
 --
 
 INSERT INTO `qw_auth_group` (`id`, `title`, `status`, `rules`) VALUES
-(1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57');
+(1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `qw_auth_rule` (
   `o` int(11) NOT NULL COMMENT '排序',
   `tips` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
 
 --
 -- 转存表中的数据 `qw_auth_rule`
@@ -162,7 +162,12 @@ INSERT INTO `qw_auth_rule` (`id`, `pid`, `name`, `title`, `icon`, `type`, `statu
 (54, 11, 'Update/updating', '升级安装', '', 1, 1, '', 0, 54, ''),
 (55, 48, 'Personal/update', '资料保存', '', 1, 1, '', 0, 55, ''),
 (56, 3, 'Setting/update', '设置保存', '', 1, 1, '', 0, 56, ''),
-(57, 0, 'Database/del', '备份删除', '', 1, 1, '', 0, 57, '');
+(57, 9, 'Database/del', '备份删除', '', 1, 1, '', 0, 57, ''),
+(58, 2, 'variable/index', '自定义变量', '', 1, 1, '', 1, 0, ''),
+(59, 58, 'variable/add', '新增变量', '', 1, 1, '', 0, 0, ''),
+(60, 58, 'variable/edit', '编辑变量', '', 1, 1, '', 0, 0, ''),
+(61, 58, 'variable/update', '保存变量', '', 1, 1, '', 0, 0, ''),
+(62, 58, 'variable/del', '删除变量', '', 1, 1, '', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -301,6 +306,9 @@ INSERT INTO `qw_member` (`uid`, `user`, `head`, `sex`, `birthday`, `phone`, `qq`
 CREATE TABLE IF NOT EXISTS `qw_setting` (
   `k` varchar(100) NOT NULL COMMENT '变量',
   `v` varchar(255) NOT NULL COMMENT '值',
+  `type` tinyint(1) NOT NULL COMMENT '0系统，1自定义',
+  `name` varchar(255) NOT NULL COMMENT '说明',
+  PRIMARY KEY (`k`),
   KEY `k` (`k`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -308,9 +316,10 @@ CREATE TABLE IF NOT EXISTS `qw_setting` (
 -- 转存表中的数据 `qw_setting`
 --
 
-INSERT INTO `qw_setting` (`k`, `v`) VALUES
-('sitename', '恰维管理系统'),
-('title', 'QWADMIN'),
-('keywords', '关键词一,关键词二'),
-('description', '网站描述'),
-('footer', '2016&copy;恰维网络');
+INSERT INTO `qw_setting` (`k`, `v`, `type`, `name`) VALUES
+('sitename', 'QWADMIN', 0, ''),
+('title', 'QWADMIN', 0, ''),
+('keywords', '关键词', 0, ''),
+('description', '网站描述', 0, ''),
+('footer', '2016©恰维网络', 0, ''),
+('test', '这是变量的值网站设置中可以改', 1, '测试变量');
