@@ -96,13 +96,11 @@
 				$(".inputorder").change(function(){
 					var id = $(this).attr('val');
 					var o = $(this).val();
-					if(id != o){
-						$.post('{:U('update',array('act'=>'order'))}',{id:id,o:o},function(data){
-							if(data==1){
-								window.location.reload(true);
-							}
-						});
-					}
+					$.post('{:U('update',array('act'=>'order'))}',{id:id,o:o},function(data){
+						if(data==1){
+							window.location.reload(true);
+						}
+					});
 				})
 				$(".del").on('click',function(){
 					var obj = $(this);
