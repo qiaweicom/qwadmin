@@ -33,9 +33,52 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<div class="sort col-xs-10">
-									{$category}
-								</div>
+								<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th class="col-xs-7">分类名称</th>
+										<th class="col-xs-1">排序</th>
+										<th class="col-xs-2">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+								<if condition="!empty($category)">
+								<php>
+								function showTree($data,$pre=null) {
+									
+									foreach ($data as $key => $val) {
+										echo '<tr>';
+										echo '<td>';
+										if($pre){
+											echo $pre.'┗━'.$val['name'];
+										}else{
+											echo $val['name'];
+										}
+										echo '</td>';
+										echo '<td>';
+										echo '<input name="o" class="inputorder" type="number" value="'.$val['o'].'" val="'.$val['id'].'" />';
+										echo '</td>';
+										echo '<td>';
+										echo '<a class="green" href="'.U('add',array('pid'=>$val['id'])).'" title="新增分类"><i class="ace-icon fa fa-plus-circle bigger-100"></i>新增</a>&nbsp;&nbsp;';
+										echo '<a class="blue" href="'.U('edit',array('id'=>$val['id'])).'" title="编辑分类"><i class="ace-icon fa fa-plus-circle bigger-100"></i>编辑</a>&nbsp;&nbsp;';
+										echo '<a class="red del" href="javascript:void(0);" val="'.$val['id'].'" title="删除分类"><i class="ace-icon fa fa-plus-circle bigger-100"></i>删除</a>';
+										echo '</td>';
+										if (!empty($val['children'])) {
+											showTree($val['children'],$pre.'&nbsp;&nbsp;');
+										}
+
+										echo '</tr>';
+									}
+								}
+								showTree($category);
+								</php>
+								<else />
+								<tr>
+									<td colspan="3">无分类</td>
+								</tr>
+								</if>
+								</tbody>
+								</table>
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
@@ -50,53 +93,20 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			$(function(){
-				$(".idpid").on('mouseover',function(){
-					$(this).addClass('bg-success');
-				});
-				$(".idpid").on('mouseout',function(){
-					$(this).removeClass('bg-success');
-				});
-
-				$(".sort").on('click',".fa-folder",function(){
-					$(this).removeClass('fa-folder').addClass("fa-folder-open");
-					var obj = $(this).parent();
-					var id = obj.attr('val');
-					var pid = obj.attr('pid');
-					openchild(pid,id);
-				 })
-
-				$(".sort").on('click',".fa-folder-open",function(){
-					$(this).removeClass('fa-folder-open').addClass("fa-folder");
-					var obj = $(this).parent();
-					var id = obj.attr('val');
-					var pid = obj.attr('pid');
-					closechild(pid,id);
-				 })
-				
-				function closechild(pid,id){
-					var obj = $('.pid'+id);//获取所有子元素
-					obj.addClass('hidden');//子元素关闭
-					obj.find('.fa-folder-open').removeClass('fa-folder-open').addClass("fa-folder");
-					obj.each(function(){
-						var child_pid = $(this).attr('pid');
-						var child_id = $(this).attr('val');
-						closechild(child_pid,child_id);
-					 });
-				}
-				
-				function openchild(pid,id){
-					var obj = $('.pid'+id);//获取所有子元素
-					obj.removeClass('hidden');//子元素关闭
-					obj.each(function(){
-						var child_pid = $(this).attr('pid');
-						var child_id = $(this).attr('val');
-						closechild(child_pid,child_id);
-					 });
-				}
-				
-				$(".sort").on('click',".fa-trash-o",function(){
+				$(".inputorder").change(function(){
+					var id = $(this).attr('val');
+					var o = $(this).val();
+					if(id != o){
+						$.post('{:U('update',array('act'=>'order'))}',{id:id,o:o},function(data){
+							if(data==1){
+								window.location.reload(true);
+							}
+						});
+					}
+				})
+				$(".del").on('click',function(){
 					var obj = $(this);
-					var id = obj.attr('id');
+					var id = obj.attr('val');
 					bootbox.confirm({
 						title: "系统提示",
 						message: "是否要删除该分类？", 
@@ -116,25 +126,19 @@
 										});  
 										return;
 									}else if(result==1){
-										bootbox.confirm({  
+										bootbox.alert({  
 											buttons: {  
-												confirm: {  
-													label: '是',  
-													className: 'btn-myStyle'  
-												},  
-												cancel: {  
-													label: '否',  
-													className: 'btn-default'  
-												}
+											   ok: {  
+													label: '确定',  
+													className: 'btn-danger'  
+												}  
 											},  
-											message: '恭喜，分类删除成功！是否刷新？',  
-											callback: function(result) {  
-												if(result) {  
-													window.location.reload(true);
-												} 
+											message: '恭喜，删除成功！',  
+											callback: function() {  
+												window.location.reload(true);
 											},  
-											title: "提示信息",  
-										});
+											title: "友情提示",  
+										});  
 										return;
 									}else{
 										bootbox.dialog({

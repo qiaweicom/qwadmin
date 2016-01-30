@@ -18,11 +18,8 @@ class CategoryController extends ComController {
 	public function index(){
 	
 		
-		$category = M('category')->field('id,pid,name')->order('o asc')->select();
-		
-		$tree = new Tree($category);
-		$str = "<div class='idpid id\$id pid\$pid' val='\$id' pid='\$pid'><span class='red'>\$spacer</span><a href='javascript:;' class='menu-icon fa fa-folder-open orange bigger-100'></a>\$name<span class='pull-right'><a href='add.html?pid=\$id' class='ace-icon fa fa-plus'>新增</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='edit.html?id=\$id' class='ace-icon fa fa-pencil'>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:;' class='ace-icon fa fa-trash-o red' id='\$id'>删除</a></span></div>"; //生成的形式
-		$category = $tree->get_tree(0,$str,0);
+		$category = M('category')->field('id,pid,name,o')->order('o asc')->select();
+		$category = $this->getMenu($category);
 		$this->assign('category',$category);
 		$this -> display();
 	}
@@ -73,8 +70,16 @@ class CategoryController extends ComController {
 		$this -> display();
 	}
 	
-	public function update(){
-		
+	public function update($act=null){
+		if($act=='order'){
+			$id = I('post.id',0,'intval');
+			if(!$id){
+				die('0');
+			}
+			$o = I('post.o',0,'intval');
+			M('category')->data(array('o'=>$o))->where("id='{$id}'")->save();
+			die('1');
+		}
 		$id = isset($_POST['id'])?intval($_POST['id']):false;
 		$data['pid'] = isset($_POST['pid'])?intval($_POST['pid']):0;
 		$data['name'] = isset($_POST['name'])?trim($_POST['name']):false;
