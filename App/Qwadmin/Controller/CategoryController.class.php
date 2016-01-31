@@ -78,6 +78,7 @@ class CategoryController extends ComController {
 			}
 			$o = I('post.o',0,'intval');
 			M('category')->data(array('o'=>$o))->where("id='{$id}'")->save();
+			addlog('分类修改排序，ID：'.$id);
 			die('1');
 		}
 		$id = isset($_POST['id'])?intval($_POST['id']):false;
