@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2016 年 01 月 28 日 12:56
+-- 生成日期: 2016 年 02 月 16 日 10:24
 -- 服务器版本: 5.1.63
 -- PHP 版本: 5.2.17p1
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `qw_article` (
   `n` int(10) unsigned NOT NULL COMMENT '点击',
   PRIMARY KEY (`aid`),
   KEY `sid` (`sid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
 -- --------------------------------------------------------
@@ -52,14 +52,14 @@ CREATE TABLE IF NOT EXISTS `qw_auth_group` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `rules` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `qw_auth_group`
 --
 
 INSERT INTO `qw_auth_group` (`id`, `title`, `status`, `rules`) VALUES
-(1, '超级管理员', 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62');
+(1, '超级管理员', 1, '1,2,58,59,60,61,62,3,56,4,6,5,7,8,9,10,51,52,53,57,11,54,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,33,34,36,37,63,38,39,40,41,42,43,44,45,46,47,48,49,50,55');
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `qw_auth_rule` (
   `o` int(11) NOT NULL COMMENT '排序',
   `tips` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- 转存表中的数据 `qw_auth_rule`
@@ -167,7 +167,8 @@ INSERT INTO `qw_auth_rule` (`id`, `pid`, `name`, `title`, `icon`, `type`, `statu
 (59, 58, 'variable/add', '新增变量', '', 1, 1, '', 0, 0, ''),
 (60, 58, 'variable/edit', '编辑变量', '', 1, 1, '', 0, 0, ''),
 (61, 58, 'variable/update', '保存变量', '', 1, 1, '', 0, 0, ''),
-(62, 58, 'variable/del', '删除变量', '', 1, 1, '', 0, 0, '');
+(62, 58, 'variable/del', '删除变量', '', 1, 1, '', 0, 0, ''),
+(63, 37, 'Facebook/add', '用户反馈', '', 1, 1, '', 1, 63, '');
 
 -- --------------------------------------------------------
 
@@ -184,7 +185,8 @@ CREATE TABLE IF NOT EXISTS `qw_category` (
   `o` int(11) NOT NULL COMMENT '排序',
   PRIMARY KEY (`id`),
   KEY `fsid` (`pid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 
 -- --------------------------------------------------------
 
@@ -288,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `qw_member` (
   `password` varchar(32) NOT NULL,
   `t` int(10) unsigned NOT NULL COMMENT '注册时间',
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `qw_member`
@@ -317,9 +319,8 @@ CREATE TABLE IF NOT EXISTS `qw_setting` (
 --
 
 INSERT INTO `qw_setting` (`k`, `v`, `type`, `name`) VALUES
-('sitename', 'QWADMIN', 0, ''),
+('sitename', '恰维网络', 0, ''),
 ('title', 'QWADMIN', 0, ''),
 ('keywords', '关键词', 0, ''),
 ('description', '网站描述', 0, ''),
-('footer', '2016©恰维网络', 0, ''),
-('test', '这是变量的值网站设置中可以改', 1, '测试变量');
+('footer', '2016©恰维网络', 0, '');
