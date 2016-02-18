@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>新增焦点图-{$Think.CONFIG.title}</title>
+		<title>{$current['title']}-{$Think.CONFIG.title}</title>
 
 		<meta name="keywords" content="{$Think.CONFIG.keywords}" />
 		<meta name="description" content="{$Think.CONFIG.description}" />
@@ -23,23 +23,7 @@
 			<div class="main-content">
 				<div class="main-content-inner">
 					<!-- #section:basics/content.breadcrumbs -->
-					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
-
-						<ul class="breadcrumb">
-							<li>
-								<i class="ace-icon fa fa-home home-icon"></i>
-								<a href="{$Think.CONFIG.URL}/Qwadmin/">首页</a>
-							</li>
-
-							<li>
-								<a href="{:U('index')}">焦点图管理</a>
-							</li>
-							<li class="active">新增焦点图</li>
-						</ul><!-- /.breadcrumb -->
-					</div>
+					<include file="Public/breadcrumbs" />
 
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
@@ -98,7 +82,7 @@
 									</div>
 
 									<div class="col-md-offset-2 col-md-9">
-										<button class="btn btn-info" type="button">
+										<button class="btn btn-info submit" type="button">
 											<i class="icon-ok bigger-110"></i>
 											提交
 										</button>
@@ -124,7 +108,7 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 		$(function() {
-			$(".btn-info").click(function(){
+			$(".btn-info.submit").click(function(){
 				var webname = $("#webname").val();
 				var url = $("#url").val();
 				if(webname==0){

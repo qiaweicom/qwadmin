@@ -25,20 +25,19 @@ class ComController extends BaseController {
 		}
 		$Auth  =   new Auth();
 		$allow_controller_name=array('Upload');//放行控制器名称
-		$allow_action_name=array('save','update','del');//放行函数名称
+		$allow_action_name=array();//放行函数名称
 		if(!$Auth->check(CONTROLLER_NAME.'/'.ACTION_NAME,$this->USER['uid'])&&!in_array(CONTROLLER_NAME,$allow_controller_name)&&!in_array(ACTION_NAME,$allow_action_name)){            
 			$this->error('没有权限访问本页面!');
 		}
-		
-		
+
 		$user = member(intval($user['uid']));
 		$this->assign('user',$user);
 
 		$prefix = C('DB_PREFIX');
 		$m =  M();
 		$current_action_name= ACTION_NAME=='edit'? "index":ACTION_NAME;
-		$current = $m->query("SELECT s.id,s.pid,p.pid as ppid FROM {$prefix}auth_rule s left join {$prefix}auth_rule p on p.id=s.pid where s.name='".CONTROLLER_NAME.'/'.$current_action_name."'");
-		$this->assign('current',$current[0]);
+		$current = $m->query("SELECT s.id,s.title,s.name,s.tips,s.pid,p.pid as ppid,p.title as ptitle FROM {$prefix}auth_rule s left join {$prefix}auth_rule p on p.id=s.pid where s.name='".CONTROLLER_NAME.'/'.$current_action_name."'");
+		$this->assign('current',$current[0]);		
 		$UID=$this->USER['uid'];
 		$menu_access = $m->query("SELECT rules FROM {$prefix}auth_group g left join {$prefix}auth_group_access a on g.id=a.group_id where a.uid=$UID");
 		$menu_access_id=$menu_access[0]['rules'];

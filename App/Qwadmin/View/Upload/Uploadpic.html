@@ -15,16 +15,16 @@
 	</style>
     <!--[if !IE]> -->
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/qwadmin/js/jquery.js'>"+"<"+"/script>");
 		</script>
 		<!-- <![endif]-->
 		<!--[if IE]>
 		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery1x.js'>"+"<"+"/script>");
+		 window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/qwadmin/js/jquery1x.js'>"+"<"+"/script>");
 		</script>
 		<![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='{$Think.CONFIG.URL}/Public/qwadmin/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 		</script>
 </head>
 
@@ -34,7 +34,7 @@
         <input type="hidden" value="{$Height}" name="Height">
         <input type="hidden" value="{$BackCall}" name="BackCall">
         <div class="uploadpic">
-		<img id="ImgPr" src="<if condition="$Img eq ''">{$Think.CONFIG.URL}/Public/images/nopic.gif<else />{$Img}</if>"  width="{$Width}" height="{$Height}">
+		<img id="ImgPr" src="<if condition="$Img eq ''">{$Think.CONFIG.URL}/Public/qwadmin/images/nopic.gif<else />{$Img}</if>"  width="{$Width}" height="{$Height}">
         <div class="uploadtext">上传</div>
 			<div class="inputfile" title="点击上传图片">
 				<input type="file" name="img" id="uploadicon" value="upload"/>

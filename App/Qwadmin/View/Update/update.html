@@ -92,7 +92,7 @@
 					if(result){
 						$('#uploading').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-120"></i>系统升级中...请勿关闭窗口');
 						$('#upmsg').html('');
-						$.getJSON("{$Think.CONFIG.URL}/Qwadmin/Update/updating?file="+file,function(json){
+						$.getJSON("{:U('updating')}?file="+file,function(json){
 							$('#uploading').html('');
 								bootbox.alert({  
 									buttons: {  

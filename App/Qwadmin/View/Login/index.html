@@ -12,20 +12,12 @@
    </head>
 
 	<body class="login-layout">
-		<div class="main-container">
+		<div class="main-container login-main-container">
 			<div class="main-content">
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="login-container">
-							<div class="center">
-								<h1>
-									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="white" id="id-text2">{$Think.CONFIG.title}</span>
-								</h1>
-								<h4 class="blue" id="id-company-text">&copy; 恰维网络</h4>
-							</div>
-
-							<div class="space-6"></div>
+							<div class="space-6"></div> 
 
 							<div class="position-relative">
 								<div id="login-box" class="login-box visible widget-box no-border">
@@ -33,7 +25,7 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
-												用户登录
+												<b>{$Think.CONFIG.title}</b>
 											</h4>
 
 											<div class="space-6"></div>
@@ -58,7 +50,7 @@
 													<label class="block clearfix">
 														<span class="block input-icon ">
 															<span class="inline"><input type="text" class="form-control" name="verify" placeholder="验证码" id="code" required /></span>
-															<img style="cursor:pointer;" src="{$Think.CONFIG.URL}/Qwadmin/login/verify" width="100" height="30" title="看不清楚？点击刷新" onclick="this.src = '/Qwadmin/login/verify?'+new Date().getTime()">
+															<img style="cursor:pointer;" src="{:U('login/verify')}" width="100" height="30" title="看不清楚？点击刷新" onclick="this.src = '{:U('login/verify')}?'+new Date().getTime()">
 														</span>
 													</label>
 													
@@ -108,18 +100,18 @@
 
 		<!--[if !IE]> -->
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/qwadmin/js/jquery.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery1x.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='{$Think.CONFIG.URL}/Public/qwadmin/js/jquery1x.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='{$Think.CONFIG.URL}/Public/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='{$Think.CONFIG.URL}/Public/qwadmin/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- inline scripts related to this page -->

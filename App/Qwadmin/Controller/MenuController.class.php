@@ -24,11 +24,12 @@ class MenuController extends ComController {
 		$offset = $pagesize*($p-1);//计算记录偏移量
 		$count = $m->count();
 		
-		$list  = $m->order('o asc')->limit($offset.','.$pagesize)->select();
+		$list  = $m->order('o asc')->select();
+		$list = $this->getMenu($list);
+		
 		$page	=	new \Think\Page($count,$pagesize); 
-		$page = $page->show();
         $this->assign('list',$list);	
-        $this->assign('page',$page);
+
 		$this -> display();
     }
 	
