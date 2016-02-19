@@ -1,8 +1,8 @@
 <?php
 /**
 *
-* 版权所有：恰维网络<www.qiawei.com>
-* 作    者：小马哥<admin@huikon.cn>
+* 版权所有：恰维网络<qwadmin.qiawei.com>
+* 作    者：小马哥<hanchuan@qiawei.com>
 * 日    期：2015-09-17
 * 版    本：1.0.3
 * 功能说明：文件上传控制器。
