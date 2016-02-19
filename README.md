@@ -1,5 +1,5 @@
 
-# qiaweiadmin
+# QWadmin
 基于thinkphp与aceadmin模板的后台管理系统
 
 使用说明：
@@ -9,3 +9,12 @@
 3.在config.php文件填写数据库配置信息
 
 后台地址：http://www.example.com/index.php/Qwadmin/   账号admin  密码 qiawei88
+
+
+官网地址：http://qwadmin.qiawei.com/
+
+QQ群：23127219
+
+欢迎大家有进行沟通交流！
+
+开源是一种精神！为中国的互联网行业发展献出一份小小的力量~~
