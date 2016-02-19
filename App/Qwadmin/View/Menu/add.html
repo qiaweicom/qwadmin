@@ -111,9 +111,9 @@
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 页面提示</label>
 										<div class="col-sm-9">
-											<textarea name="tips" id="tips" placeholder="页面提示" class="col-xs-10 col-sm-5" rows="5">页面提示</textarea>
+											<textarea name="tips" id="tips" placeholder="页面提示" class="col-xs-10 col-sm-5" rows="5"></textarea>
 											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">后台页面提示</span>
+												<span class="middle"></span>
 											</span>
 										</div>
 									</div>
@@ -144,7 +144,17 @@
 		<include file="Public/footerjs" />
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
-		$(".btn.btn-info").click(function(){
+		$(function(){
+			var editor = KindEditor.create('textarea[name="tips"]',{
+				resizeType : 1,
+				allowPreviewEmoticons : false,
+				allowImageUpload : false,
+				items : [
+					'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+					'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+					'insertunorderedlist', '|', 'emoticons','link']
+			});
+			$(".btn.btn-info").click(function(){
 			var title = $("#title").val();
 			if(title == ''){
 				bootbox.alert({  
@@ -159,8 +169,9 @@
 				});  
 				return false;
 			}
-			
+			})
 		})
+		
 		</script>
 
 	</body>
