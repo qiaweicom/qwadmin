@@ -82,6 +82,7 @@ class MenuController extends ComController {
 		$data['islink'] = I('post.islink','','intval');
 		$data['status'] = 1;
 		$data['o'] = I('post.o','','intval');
+		$data['tips'] = I('post.tips','','strip_tags');
 		if($id){
 			M('auth_rule')->data($data)->where("id='{$id}'")->save();
 			addlog('编辑菜单，ID：'.$id);
