@@ -78,9 +78,9 @@ class CategoryController extends ComController {
 			}
 			$o = I('post.o',0,'intval');
 			M('category')->data(array('o'=>$o))->where("id='{$id}'")->save();
+			addlog('分类修改排序，ID：'.$id);
 			die('1');
-		}
-		$id = isset($_POST['id'])?intval($_POST['id']):false;
+		}		$id = isset($_POST['id'])?intval($_POST['id']):false;
 		$data['pid'] = isset($_POST['pid'])?intval($_POST['pid']):0;
 		$data['name'] = isset($_POST['name'])?trim($_POST['name']):false;
 		$data['keywords'] = isset($_POST['keywords'])?strip_tags(trim($_POST['keywords'])):'';
