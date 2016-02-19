@@ -113,7 +113,7 @@
 										<div class="col-sm-9">
 											<textarea name="tips" id="tips" placeholder="页面提示" class="col-xs-10 col-sm-5" rows="5">{$currentmenu.tips}</textarea>
 											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">后台页面提示</span>
+												<span class="middle"></span>
 											</span>
 										</div>
 									</div>
@@ -145,22 +145,33 @@
 		<include file="Public/footerjs" />
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
-		$(".btn.btn-info").click(function(){
-			var title = $("#title").val();
-			if(title == ''){
-				bootbox.alert({  
-					buttons: {  
-					   ok: {  
-							label: '确定',  
-							className: 'btn-myStyle'  
-						}  
-					},  
-					message: '菜单名称不能为空。',
-					title: "友情提示",  
-				});  
-				return false;
-			}
-			
+		$(function(){
+			var editor = KindEditor.create('textarea[name="tips"]',{
+				resizeType : 1,
+				allowPreviewEmoticons : false,
+				allowImageUpload : false,
+				items : [
+					'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+					'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+					'insertunorderedlist', '|', 'emoticons','link']
+			});
+			$(".btn.btn-info").click(function(){
+				var title = $("#title").val();
+				if(title == ''){
+					bootbox.alert({  
+						buttons: {  
+						   ok: {  
+								label: '确定',  
+								className: 'btn-myStyle'  
+							}  
+						},  
+						message: '菜单名称不能为空。',
+						title: "友情提示",  
+					});  
+					return false;
+				}
+				
+			})
 		})
 		</script>
 
