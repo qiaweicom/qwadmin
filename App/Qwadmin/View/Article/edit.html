@@ -131,8 +131,8 @@
 		<script type="text/javascript">
 		$(function() {
 			var editor = KindEditor.create('textarea[name="content"]',{
-				uploadJson : '{$Think.CONFIG.URL}/Public/kindeditor/php/upload_json.php',
-				fileManagerJson : '{$Think.CONFIG.URL}/Public/kindeditor/php/file_manager_json.php',
+				uploadJson : '__PUBLIC__/kindeditor/php/upload_json.php',
+				fileManagerJson : '__PUBLIC__/kindeditor/php/file_manager_json.php',
 				allowFileManager : true,
 				afterBlur:function(){this.sync();}  
 				});

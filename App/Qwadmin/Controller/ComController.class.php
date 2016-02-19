@@ -18,9 +18,9 @@ class ComController extends BaseController {
 		C(setting());
 		$user = cookie('user');
 		$this->USER = $user;
-		$url = C("URL");
+		$url = U("login/index");
 		if(!$user){
-			header("Location: {$url}/Qwadmin/login.html");
+			header("Location: {$url}");
 			exit(0);
 		}
 		$Auth  =   new Auth();

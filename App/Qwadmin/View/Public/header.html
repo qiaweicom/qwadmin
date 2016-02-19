@@ -19,7 +19,7 @@
 				<!-- /section:basics/sidebar.mobile.toggle -->
 				<div class="navbar-header pull-left">
 					<!-- #section:basics/navbar.layout.brand -->
-					<a href="{$Think.CONFIG.URL}/Qwadmin/" class="navbar-brand">
+					<a href="{:U('index/index')}" class="navbar-brand">
 						<small>
 							<i class="fa fa-home"></i>
 							{$Think.CONFIG.title}
@@ -44,7 +44,7 @@
 						</li>
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<if condition=" $user.head eq '' ">{$Think.CONFIG.URL}/Public/qwadmin/avatars/avatar2.png<else />{$Think.CONFIG.URL}{$user.head}</if>" alt="{$user.user}" />
+								<img class="nav-user-photo" src="<if condition=" $user.head eq '' ">__PUBLIC__/qwadmin/avatars/avatar2.png<else />{$user.head}</if>" alt="{$user.user}" />
 								<span class="user-info">
 									<small>欢迎光临，</small>
 									{$user.user}
@@ -55,14 +55,14 @@
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="{$Think.CONFIG.URL}/Qwadmin/Setting/setting.html">
+									<a href="{:U('Setting/Setting')}">
 										<i class="ace-icon fa fa-cog"></i>
 										设置
 									</a>
 								</li>
 
 								<li>
-									<a href="{$Think.CONFIG.URL}/Qwadmin/Personal/profile.html">
+									<a href="{:U('Personal/profile')}">
 										<i class="ace-icon fa fa-user"></i>
 										个人资料
 									</a>
@@ -71,7 +71,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="{$Think.CONFIG.URL}/Qwadmin/logout.html">
+									<a href="{:U('logout/index')}">
 										<i class="ace-icon fa fa-power-off"></i>
 										退出
 									</a>

@@ -14,8 +14,8 @@ use Qwadmin\Controller\ComController;
 class LogoutController extends ComController {
     public function index(){
 		cookie('user',null);
-		$url = C("URL");
-		header("Location: {$url}/Qwadmin/login.html");
+		$url = U("login/index");
+		header("Location: {$url}");
 		exit(0);
     }
 }
