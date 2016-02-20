@@ -8,7 +8,7 @@
 2.将文件App/Common/Conf/config_bak.php 重命名为config.php文件
 3.在config.php文件填写数据库配置信息
 
-后台地址：http://www.example.com/index.php/Qwadmin/   账号admin  密码 qiawei88
+后台地址：http://www.example.com/index.php/Qwadmin/   账号admin  密码 admin
 
 
 官网地址：http://qwadmin.qiawei.com/
