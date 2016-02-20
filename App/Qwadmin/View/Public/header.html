@@ -44,7 +44,7 @@
 						</li>
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="<if condition=" $user.head eq '' ">__PUBLIC__/qwadmin/avatars/avatar2.png<else />{$user.head}</if>" alt="{$user.user}" />
+								<img class="nav-user-photo" src="<if condition=" $user.head eq '' ">__PUBLIC__/qwadmin/avatars/avatar2.png<else />__ROOT__{$user.head}</if>" alt="{$user.user}" />
 								<span class="user-info">
 									<small>欢迎光临，</small>
 									{$user.user}

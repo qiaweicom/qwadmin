@@ -55,7 +55,7 @@
 										<tr>
 											<td class="center"><input class="ids" type="checkbox" name="ids[]" value="{$val['id']}"></td>
 											<td><a href="{$val['url']}" target="_blank">{$val['title']}</a></td>
-											<td><if condition="$val['logo'] neq ''"><img src="{$val['logo']}" width="88" height="31"><else />文本链接</if></td>
+											<td><if condition="$val['logo'] neq ''"><img src="__ROOT__{$val['logo']}" width="88" height="31"><else />文本链接</if></td>
 											<td><a href="{$val['url']}" target="_blank">{$val['url']}</a></td>
 											<td>{$val['o']}</td>
 											<td><a href="{:U('edit')}?id={$val['id']}"><i class="ace-icon fa fa-pencil bigger-100"></i>修改</a>&nbsp&nbsp;<a href="javascript:;" val="{:U('del')}?ids={$val['id']}" class="dellink"><i class="ace-icon fa fa-trash-o bigger-100 red"></i>删除</a></td>
