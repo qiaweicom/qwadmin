@@ -47,7 +47,8 @@
 									<volist name="list" id="val">
 										<tr>
 											<td class="center">
-												<input class="ids" type="checkbox" name="ids[]" value="{$val['id']}">
+												<if condition="$val['id'] neq 1"><input class="ids" type="checkbox" name="ids[]" value="{$val['uid']}"><else /><span title="系统用户组，禁止删除">--</span></if>
+											
 											</td>
 											<td>{$val['title']}</td>
 											<td><if condition="$val['status'] eq 1"><a href="" title="点击禁用">启用</a><else /><a href="" title="点击启用">启用</a></if></td>

@@ -37,7 +37,7 @@
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 用户名 </label>
 										<div class="col-sm-9">
-											<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5" value="{$member.user}">
+											<input type="text" readonly class="rcol-xs-10 col-sm-5" value="{$member.user}">
 											<input type="hidden" name="uid" value="{$member['uid']}">
 											<span class="help-inline col-xs-12 col-sm-7">
 												<span class="middle">无法修改</span>
@@ -50,13 +50,23 @@
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-10"> 用户组 </label>
 										<div class="col-sm-9">
-										<select id="group_id" name="group_id" class="rcol-xs-10 col-sm-5">
+										<if condition="$member['uid'] eq 1">
+											<volist name="usergroup" id="val">
+												<if condition="$val['id'] eq $member['group_id']">
+												<input type="text"  class="col-xs-10 col-sm-5" value="{$val['title']}" readonly>
+												<input type="hidden" name="group_id" id="group_id"  class="col-xs-10 col-sm-5" value="{$member['group_id']}" >
+												</if>
+											</volist>
+											
+										<else />
+										<select id="group_id" name="group_id" class="rcol-xs-10 col-sm-5" >
 											<volist name="usergroup" id="val">
 												<option value="{$val['id']}" <if condition="$val['id'] eq $member['group_id']">selected="selected"</if>>{$val['title']}</option>
 											</volist>
 										</select>
+										</if>
 										<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">用户组</span>
+												<span class="middle">请慎重选择用户组</span>
 											</span>
 										</div>
 									</div>

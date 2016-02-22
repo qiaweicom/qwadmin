@@ -27,7 +27,7 @@ class MemberController extends ComController {
 		}elseif(($order == 'desc')){
 			$order = "{$prefix}member.t desc";
 		}else{
-			$order = "{$prefix}member.uid desc";
+			$order = "{$prefix}member.uid asc";
 		}
 		if($keyword <>''){
 			if($field=='user'){
@@ -141,6 +141,7 @@ class MemberController extends ComController {
 		$data['phone'] = isset($_POST['phone'])?trim($_POST['phone']):'';
 		$data['qq'] = isset($_POST['qq'])?trim($_POST['qq']):'';
 		$data['email'] = isset($_POST['email'])?trim($_POST['email']):'';
+		$data['t'] = time();
 		if(!$uid){
 			if($user==''){
 				$this->error('用户名称不能为空！');
