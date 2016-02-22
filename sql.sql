@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.7
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost
--- 生成日期: 2016 年 02 月 20 日 11:53
--- 服务器版本: 5.1.63
--- PHP 版本: 5.2.17p1
+-- Host: 127.0.0.1
+-- Generation Time: 2016-02-22 09:16:09
+-- 服务器版本： 5.7.9
+-- PHP Version: 5.6.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -16,7 +17,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `admin`
+-- Database: `qwadmin`
 --
 
 -- --------------------------------------------------------
@@ -25,6 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- 表的结构 `qw_article`
 --
 
+DROP TABLE IF EXISTS `qw_article`;
 CREATE TABLE IF NOT EXISTS `qw_article` (
   `aid` int(11) NOT NULL AUTO_INCREMENT,
   `sid` int(11) NOT NULL COMMENT '分类id',
@@ -33,16 +35,11 @@ CREATE TABLE IF NOT EXISTS `qw_article` (
   `description` varchar(255) NOT NULL COMMENT '摘要',
   `thumbnail` varchar(255) NOT NULL COMMENT '缩略图',
   `content` text NOT NULL COMMENT '内容',
-  `t` int(10) unsigned NOT NULL COMMENT '时间',
-  `n` int(10) unsigned NOT NULL COMMENT '点击',
+  `t` int(10) UNSIGNED NOT NULL COMMENT '时间',
+  `n` int(10) UNSIGNED NOT NULL COMMENT '点击',
   PRIMARY KEY (`aid`),
   KEY `sid` (`sid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `qw_article`
---
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,13 +47,14 @@ CREATE TABLE IF NOT EXISTS `qw_article` (
 -- 表的结构 `qw_auth_group`
 --
 
+DROP TABLE IF EXISTS `qw_auth_group`;
 CREATE TABLE IF NOT EXISTS `qw_auth_group` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` char(100) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `rules` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `qw_auth_group`
@@ -74,9 +72,10 @@ INSERT INTO `qw_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 -- 表的结构 `qw_auth_group_access`
 --
 
+DROP TABLE IF EXISTS `qw_auth_group_access`;
 CREATE TABLE IF NOT EXISTS `qw_auth_group_access` (
-  `uid` mediumint(8) unsigned NOT NULL,
-  `group_id` mediumint(8) unsigned NOT NULL,
+  `uid` mediumint(8) UNSIGNED NOT NULL,
+  `group_id` mediumint(8) UNSIGNED NOT NULL,
   UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
   KEY `uid` (`uid`),
   KEY `group_id` (`group_id`)
@@ -96,6 +95,7 @@ INSERT INTO `qw_auth_group_access` (`uid`, `group_id`) VALUES
 -- 表的结构 `qw_auth_rule`
 --
 
+DROP TABLE IF EXISTS `qw_auth_rule`;
 CREATE TABLE IF NOT EXISTS `qw_auth_rule` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `qw_auth_rule` (
   `o` int(11) NOT NULL COMMENT '排序',
   `tips` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `qw_auth_rule`
@@ -184,6 +184,7 @@ INSERT INTO `qw_auth_rule` (`id`, `pid`, `name`, `title`, `icon`, `type`, `statu
 -- 表的结构 `qw_category`
 --
 
+DROP TABLE IF EXISTS `qw_category`;
 CREATE TABLE IF NOT EXISTS `qw_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL COMMENT '父ID',
@@ -193,12 +194,7 @@ CREATE TABLE IF NOT EXISTS `qw_category` (
   `o` int(11) NOT NULL COMMENT '排序',
   PRIMARY KEY (`id`),
   KEY `fsid` (`pid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `qw_category`
---
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -206,6 +202,7 @@ CREATE TABLE IF NOT EXISTS `qw_category` (
 -- 表的结构 `qw_devlog`
 --
 
+DROP TABLE IF EXISTS `qw_devlog`;
 CREATE TABLE IF NOT EXISTS `qw_devlog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `v` varchar(225) NOT NULL COMMENT '版本号',
@@ -213,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `qw_devlog` (
   `t` int(10) NOT NULL COMMENT '发布日期',
   `log` text NOT NULL COMMENT '更新日志',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `qw_devlog`
@@ -222,13 +219,13 @@ CREATE TABLE IF NOT EXISTS `qw_devlog` (
 INSERT INTO `qw_devlog` (`id`, `v`, `y`, `t`, `log`) VALUES
 (1, '1.0.0', 2016, 1440259200, 'QWADMIN第一个版本发布。');
 
-
 -- --------------------------------------------------------
 
 --
 -- 表的结构 `qw_flash`
 --
 
+DROP TABLE IF EXISTS `qw_flash`;
 CREATE TABLE IF NOT EXISTS `qw_flash` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -237,12 +234,7 @@ CREATE TABLE IF NOT EXISTS `qw_flash` (
   `o` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `o` (`o`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `qw_flash`
---
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -250,6 +242,7 @@ CREATE TABLE IF NOT EXISTS `qw_flash` (
 -- 表的结构 `qw_links`
 --
 
+DROP TABLE IF EXISTS `qw_links`;
 CREATE TABLE IF NOT EXISTS `qw_links` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -258,12 +251,7 @@ CREATE TABLE IF NOT EXISTS `qw_links` (
   `o` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `o` (`o`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `qw_links`
---
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -271,6 +259,7 @@ CREATE TABLE IF NOT EXISTS `qw_links` (
 -- 表的结构 `qw_log`
 --
 
+DROP TABLE IF EXISTS `qw_log`;
 CREATE TABLE IF NOT EXISTS `qw_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -278,12 +267,7 @@ CREATE TABLE IF NOT EXISTS `qw_log` (
   `ip` varchar(16) NOT NULL,
   `log` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `qw_log`
---
-
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -291,6 +275,7 @@ CREATE TABLE IF NOT EXISTS `qw_log` (
 -- 表的结构 `qw_member`
 --
 
+DROP TABLE IF EXISTS `qw_member`;
 CREATE TABLE IF NOT EXISTS `qw_member` (
   `uid` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(225) NOT NULL,
@@ -301,9 +286,9 @@ CREATE TABLE IF NOT EXISTS `qw_member` (
   `qq` varchar(20) NOT NULL COMMENT 'QQ',
   `email` varchar(255) NOT NULL COMMENT '邮箱',
   `password` varchar(32) NOT NULL,
-  `t` int(10) unsigned NOT NULL COMMENT '注册时间',
+  `t` int(10) UNSIGNED NOT NULL COMMENT '注册时间',
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `qw_member`
@@ -318,6 +303,7 @@ INSERT INTO `qw_member` (`uid`, `user`, `head`, `sex`, `birthday`, `phone`, `qq`
 -- 表的结构 `qw_setting`
 --
 
+DROP TABLE IF EXISTS `qw_setting`;
 CREATE TABLE IF NOT EXISTS `qw_setting` (
   `k` varchar(100) NOT NULL COMMENT '变量',
   `v` varchar(255) NOT NULL COMMENT '值',
@@ -338,3 +324,7 @@ INSERT INTO `qw_setting` (`k`, `v`, `type`, `name`) VALUES
 ('description', '网站描述', 0, ''),
 ('footer', '2016©恰维网络', 0, ''),
 ('test', '测试', 1, '测试变量');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
