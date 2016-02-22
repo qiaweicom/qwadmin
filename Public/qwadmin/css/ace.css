@@ -15,7 +15,7 @@ body {
   display: block;
   content: "";
   position: absolute;
-  z-index: -2;
+  z-index: 0;
   width: 100%;
   max-width: inherit;
   bottom: 0;
@@ -27,7 +27,7 @@ body {
   display: block;
   content: "";
   position: absolute;
-  z-index: -2;
+  z-index: 0;
   width: 100%;
   max-width: inherit;
   bottom: 0;
