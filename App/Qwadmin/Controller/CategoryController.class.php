@@ -80,27 +80,36 @@ class CategoryController extends ComController {
 			M('category')->data(array('o'=>$o))->where("id='{$id}'")->save();
 			addlog('分类修改排序，ID：'.$id);
 			die('1');
-		}		$id = isset($_POST['id'])?intval($_POST['id']):false;
-		$data['pid'] = isset($_POST['pid'])?intval($_POST['pid']):0;
-		$data['name'] = isset($_POST['name'])?trim($_POST['name']):false;
-		$data['keywords'] = isset($_POST['keywords'])?strip_tags(trim($_POST['keywords'])):'';
-		$data['description'] = isset($_POST['description'])?strip_tags(trim($_POST['description'])):'';
-		$data['o'] = isset($_POST['o'])?intval($_POST['o']):0;
-		if(!$data['name']){
-			die('0');
+		}
+		
+		$id = I('post.id',false,'intval');
+		$data['type'] = I('post.type',0,'intval');
+		$data['pid'] = I('post.pid',0,'intval');
+		$data['name'] = I('post.name');
+		$data['keywords'] = I('post.keywords','','htmlspecialchars');
+		$data['description'] = I('post.description','','htmlspecialchars');
+		$data['content'] = I('post.content');
+		$data['url'] = I('post.url');
+		$data['cattemplate'] = I('post.cattemplate');
+		$data['contemplate'] = I('post.contemplate');
+		$data['o'] = I('post.o',0,'intval');
+		if($data['name']==''){
+			$this->error('分类名称不能为空！');
 		}
 		if($id){
 			if(M('category')->data($data)->where('id='.$id)->save()){
 				addlog('文章分类修改，ID：'.$id.'，名称：'.$name);
-				die('1');
+				$this->success('恭喜，分类修改成功！');
+				die(0);
 			}
 		}else{
 			$id = M('category')->data($data)->add();
 			if($id){
 				addlog('新增分类，ID：'.$id.'，名称：'.$data['name']);
-				die('1');
+				$this->success('恭喜，新增分类成功！');
+				die(0);
 			}
 		}
-		die('0');
+		$this->error('参数错误！');
 	}
 }
