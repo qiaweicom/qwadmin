@@ -19,7 +19,6 @@
 function addlog($log,$name=false){
 	$Model = M('log');
 	if(!$name){
-		$user = cookie('user');
 		$auth = cookie('auth');
 		list($identifier, $token) = explode(',', $auth);
 		if (ctype_alnum($identifier) && ctype_alnum($token)) {
