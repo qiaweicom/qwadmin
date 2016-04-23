@@ -14,7 +14,8 @@ use Common\Controller\BaseController;
 use Think\Auth;
 class LoginController extends BaseController {
     public function index(){
-		
+		$user=cookie('user');
+		if(!empty($user['uid'])) $this -> error('您已经登录,正在跳转到主页',U("index/index"));
 		$this -> display();
     }
     public function login(){

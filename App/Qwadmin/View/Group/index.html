@@ -47,7 +47,7 @@
 									<volist name="list" id="val">
 										<tr>
 											<td class="center">
-												<if condition="$val['id'] neq 1"><input class="ids" type="checkbox" name="ids[]" value="{$val['uid']}"><else /><span title="系统用户组，禁止删除">--</span></if>
+												<if condition="$val['id'] neq 1"><input class="ids" type="checkbox" name="ids[]" value="{$val['id']}"><else /><span title="系统用户组，禁止删除">--</span></if>
 											
 											</td>
 											<td>{$val['title']}</td>
