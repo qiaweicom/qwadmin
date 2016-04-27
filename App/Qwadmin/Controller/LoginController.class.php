@@ -14,8 +14,24 @@ use Common\Controller\BaseController;
 use Think\Auth;
 class LoginController extends BaseController {
     public function index(){
-		$user=cookie('user');
-		if(!empty($user['uid'])) $this -> error('您已经登录,正在跳转到主页',U("index/index"));
+
+		
+		$flag = false;
+        $auth = cookie('auth');
+		list($identifier, $token) = explode(',', $auth);
+		if (ctype_alnum($identifier) && ctype_alnum($token)) {
+			$user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier'=>$identifier))->find();
+			if($user) {
+				if($token == $user['token'] && $user['identifier'] == password($user['uid'].md5($user['user'].$salt))){
+					$flag = true;
+					$this->USER = $user;
+				}
+			}
+		}
+        if ($flag) {
+           $this -> error('您已经登录,正在跳转到主页',U("index/index"));
+        }
+
 		$this -> display();
     }
     public function login(){
@@ -35,17 +51,24 @@ class LoginController extends BaseController {
 
 		$model = M("Member");
 		$user = $model ->field('uid,user')-> where(array('user'=>$username,'password'=>$password)) -> find();
+		
 		if($user) {
+			$token = password(uniqid(rand(), TRUE));
+			$salt = random(10);
+			$identifier = password($user['uid'].md5($user['user'].$salt));
+			$auth = $identifier.','.$token;
+			
+			M('member')->data(array('identifier'=>$identifier,'token'=>$token,'salt'=>$salt))->where(array('uid'=>$user['uid']))->save();
+
 			if($remember){
-				cookie('user',$user,3600*24*365);//记住我
+				cookie('auth',$auth,3600*24*365);//记住我
 			}else{
-				cookie('user',$user);
+				cookie('auth',$auth);
 			}
-			if($user){
-				addlog('登录成功。');				$url=U('index/index');
-				header("Location: $url");
-				exit(0);
-			}
+			addlog('登录成功。');
+			$url=U('index/index');
+			header("Location: $url");
+			exit(0);
 		}else{
 			addlog('登录失败。',$username);
 			$this -> error('登录失败，请重试！',U("login/index"));

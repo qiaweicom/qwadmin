@@ -179,7 +179,8 @@ CREATE TABLE `qw_devlog` (
   `t` int(10) NOT NULL COMMENT '发布日期',
   `log` text NOT NULL COMMENT '更新日志',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,6 +190,9 @@ CREATE TABLE `qw_devlog` (
 LOCK TABLES `qw_devlog` WRITE;
 /*!40000 ALTER TABLE `qw_devlog` DISABLE KEYS */;
 INSERT INTO `qw_devlog` VALUES (1,'1.0.0',2016,1440259200,'QWADMIN第一个版本发布。');
+
+INSERT INTO `qw_devlog` VALUES (2,'1.0.1',2016,1440259200,'修改cookie过于简单的安全风险。');
+
 /*!40000 ALTER TABLE `qw_devlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -236,10 +240,10 @@ CREATE TABLE `qw_links` (
   KEY `o` (`o`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
 --
 -- Dumping data for table `qw_links`
 --
+
 
 LOCK TABLES `qw_links` WRITE;
 /*!40000 ALTER TABLE `qw_links` DISABLE KEYS */;
@@ -260,7 +264,7 @@ CREATE TABLE `qw_log` (
   `ip` varchar(16) NOT NULL,
   `log` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +273,6 @@ CREATE TABLE `qw_log` (
 
 LOCK TABLES `qw_log` WRITE;
 /*!40000 ALTER TABLE `qw_log` DISABLE KEYS */;
-INSERT INTO `qw_log` VALUES (1,'admin',1459961785,'114.240.240.208','登录成功。');
 /*!40000 ALTER TABLE `qw_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,8 +294,11 @@ CREATE TABLE `qw_member` (
   `email` varchar(255) NOT NULL COMMENT '邮箱',
   `password` varchar(32) NOT NULL,
   `t` int(10) unsigned NOT NULL COMMENT '注册时间',
+  `identifier` VARCHAR(32) NOT NULL,
+  `token` VARCHAR(32) NOT NULL,
+  `salt` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +307,8 @@ CREATE TABLE `qw_member` (
 
 LOCK TABLES `qw_member` WRITE;
 /*!40000 ALTER TABLE `qw_member` DISABLE KEYS */;
-INSERT INTO `qw_member` VALUES (1,'admin','/Public/attached/201601/1453389194.png',1,1420128000,'13800138000','331349451','xieyanwei@qq.com','66d6a1c8748025462128dc75bf5ae8d1',1442505600);
+INSERT INTO `qw_member` VALUES (1,'admin','/Public/attached/201601/1453389194.png',1,1420128000,'13800138000','331349451','xieyanwei@qq.com','66d6a1c8748025462128dc75bf5ae8d1',1442505600,'','','');
+
 /*!40000 ALTER TABLE `qw_member` ENABLE KEYS */;
 UNLOCK TABLES;
 

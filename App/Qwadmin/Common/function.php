@@ -19,8 +19,14 @@
 function addlog($log,$name=false){
 	$Model = M('log');
 	if(!$name){
-		$user = cookie('user');
-		$data['name'] = $user['user'];
+		$auth = cookie('auth');
+		list($identifier, $token) = explode(',', $auth);
+		if (ctype_alnum($identifier) && ctype_alnum($token)) {
+			$user = M('member')->field('user')->where(array('identifier'=>$identifier))->find();
+			$data['name'] = $user['user'];
+		}else{
+			$data['name'] = '';
+		}
 	}else{
 		$data['name'] = $name;
 	}
