@@ -21,10 +21,22 @@ class ComController extends BaseController
     public function _initialize()
     {
         C(setting());
-        $user = cookie('user');
-        $this->USER = $user;
+		$flag = false;
+        $auth = cookie('auth');
+		list($identifier, $token) = explode(',', $auth);
+		if (ctype_alnum($identifier) && ctype_alnum($token)) {
+			$user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier'=>$identifier))->find();
+			
+			if($user) {
+				if($token == $user['token'] && $user['identifier'] == password($user['uid'].md5($user['user'].$user['salt']))){
+					$flag = true;
+					$this->USER = $user;
+				}
+			}
+		}
+
         $url = U("login/index");
-        if (!$user) {
+        if (!$flag) {
             header("Location: {$url}");
             exit(0);
         }
