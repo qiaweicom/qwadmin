@@ -4,3 +4,6 @@ App/Common/Conf/config.php
 App/Common/Conf/config.php
 
 Public/attached/
+/*.buildpath
+/*.project
+/.settings
