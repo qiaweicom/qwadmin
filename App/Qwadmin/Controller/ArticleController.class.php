@@ -95,6 +95,7 @@ class ArticleController extends ComController {
 		$aid = intval($aid);
 		$data['sid'] = isset($_POST['sid'])?intval($_POST['sid']):0;
 		$data['title'] = isset($_POST['title'])?$_POST['title']:false;
+		$data['seotitle'] = isset($_POST['seotitle'])?$_POST['seotitle']:'';
 		$data['keywords'] = I('post.keywords','','strip_tags');
 		$data['description'] = I('post.description','','strip_tags');
 		$data['content'] = isset($_POST['content'])?$_POST['content']:false;
