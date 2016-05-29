@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.1.63, for unknown-linux-gnu (x86_64)
 --
--- Host: localhost    Database: maidun
+-- Host: localhost    Database: qwadmin
 -- ------------------------------------------------------
 -- Server version	5.1.63
 
@@ -23,15 +23,16 @@ DROP TABLE IF EXISTS `qw_article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qw_article` (
-  `aid` int(11) NOT NULL AUTO_INCREMENT,
+   `aid` int(11) NOT NULL AUTO_INCREMENT,
   `sid` int(11) NOT NULL COMMENT '分类id',
   `title` varchar(255) NOT NULL COMMENT '标题',
+  `seotitle` varchar(255) DEFAULT NULL COMMENT 'SEO标题',
   `keywords` varchar(255) NOT NULL COMMENT '关键词',
   `description` varchar(255) NOT NULL COMMENT '摘要',
   `thumbnail` varchar(255) NOT NULL COMMENT '缩略图',
   `content` text NOT NULL COMMENT '内容',
-  `t` int(10) unsigned NOT NULL COMMENT '时间',
-  `n` int(10) unsigned NOT NULL COMMENT '点击',
+  `t` int(10) UNSIGNED NOT NULL COMMENT '时间',
+  `n` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '点击',
   PRIMARY KEY (`aid`),
   KEY `sid` (`sid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -143,7 +144,7 @@ CREATE TABLE `qw_category` (
   `type` tinyint(1) NOT NULL COMMENT '0正常，1单页，2外链',
   `pid` int(11) NOT NULL COMMENT '父ID',
   `name` varchar(100) NOT NULL COMMENT '名称',
-  `seotitle` varchar(200) NOT NULL COMMENT 'SEO标题',
+  `seotitle` varchar(200) DEFAULT NULL COMMENT 'SEO标题',
   `keywords` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `content` text NOT NULL,

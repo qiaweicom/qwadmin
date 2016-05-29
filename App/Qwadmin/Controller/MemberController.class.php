@@ -133,14 +133,19 @@ class MemberController extends ComController {
 			$data['password'] = password($password);
 		}
 		$head = I('post.head','','strip_tags');
-		if($head<>'') {
-			$data['head'] = $head;
-		}
+		$token = password(uniqid(rand(), TRUE));
+		$salt = random(10);
+		$identifier = password($user['uid'].md5($user['user'].$salt));
+		$auth = $identifier.','.$token;
 		$data['sex'] = isset($_POST['sex'])?intval($_POST['sex']):0;
+		$data['head'] = $head?$head:'';
 		$data['birthday'] = isset($_POST['birthday'])?strtotime($_POST['birthday']):0;
 		$data['phone'] = isset($_POST['phone'])?trim($_POST['phone']):'';
 		$data['qq'] = isset($_POST['qq'])?trim($_POST['qq']):'';
 		$data['email'] = isset($_POST['email'])?trim($_POST['email']):'';
+		$data['identifier'] =$identifier;	
+		$data['token'] = $token;
+		$data['salt'] =$salt;
 		$data['t'] = time();
 		if(!$uid){
 			if($user==''){
