@@ -95,7 +95,7 @@ CREATE TABLE `qw_auth_group_access` (
 
 LOCK TABLES `qw_auth_group_access` WRITE;
 /*!40000 ALTER TABLE `qw_auth_group_access` DISABLE KEYS */;
-INSERT INTO `qw_auth_group_access` VALUES (1,1),(2,3);
+INSERT INTO `qw_auth_group_access` VALUES (1,1);
 /*!40000 ALTER TABLE `qw_auth_group_access` ENABLE KEYS */;
 UNLOCK TABLES;
 
