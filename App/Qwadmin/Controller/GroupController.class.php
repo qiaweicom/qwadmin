@@ -23,8 +23,8 @@ class GroupController extends ComController {
 
 		$ids = isset($_POST['ids'])?$_POST['ids']:false;
 		if(is_array($ids)){
-			foreach($uids as $k=>$v){
-				$uids[$k] = intval($v);
+			foreach($ids as $k=>$v){
+				$ids[$k] = intval($v);
 			}
 			$ids = implode(',',$ids);
 			$map['id']  = array('in',$ids);
@@ -60,7 +60,8 @@ class GroupController extends ComController {
 			}
 			$data['rules'] = $rules;
 			if($id){
-				if($group = M('auth_group')->where('id='.$id)->data($data)->save()){
+			    $group = M('auth_group')->where('id='.$id)->data($data)->save();
+				if($group){
 					addlog('编辑用户组，ID：'.$id.'，组名：'.$data['title']);
 					$this->success('恭喜，用户组修改成功！');
 					exit(0);

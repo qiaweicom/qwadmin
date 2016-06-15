@@ -45,7 +45,7 @@ class UploadController extends ComController{
         $pinfo=pathinfo($file["name"]);
         $ftype=$pinfo['extension'];
         $destination = $destination_folder.time().".".$ftype;
-        if (file_exists($destination) && $overwrite != true){
+        if (file_exists($destination)){
             echo "同名文件已经存在了";
             return null;
         }

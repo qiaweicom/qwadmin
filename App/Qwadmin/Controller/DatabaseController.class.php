@@ -26,7 +26,7 @@ class DatabaseController extends ComController{
 	
 	public function recovery(){
 		//判断目录是否存在
-		is_writeable($config['path']) || mkdir('./'.C("DB_PATH_NAME").'',0777,true);
+		is_writeable(C("DB_PATH")) || mkdir('./'.C("DB_PATH_NAME").'',0777,true);
 		//列出备份文件列表
 		$path = realpath(C('DB_PATH'));
 		$flag = \FilesystemIterator::KEY_AS_FILENAME;

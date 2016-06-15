@@ -13,7 +13,6 @@ namespace Qwadmin\Controller;
 use Qwadmin\Controller\ComController;
 use Vendor\HttpDownload;
 use Vendor\Zip;
-use Vendor\Tree;
 
 class UpdateController extends ComController {
 	

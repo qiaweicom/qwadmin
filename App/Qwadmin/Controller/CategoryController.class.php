@@ -86,6 +86,7 @@ class CategoryController extends ComController {
 		$data['type'] = I('post.type',0,'intval');
 		$data['pid'] = I('post.pid',0,'intval');
 		$data['name'] = I('post.name');
+		$data['seotitle'] = I('post.seotitle','','htmlspecialchars');
 		$data['keywords'] = I('post.keywords','','htmlspecialchars');
 		$data['description'] = I('post.description','','htmlspecialchars');
 		$data['content'] = I('post.content');
@@ -98,7 +99,7 @@ class CategoryController extends ComController {
 		}
 		if($id){
 			if(M('category')->data($data)->where('id='.$id)->save()){
-				addlog('文章分类修改，ID：'.$id.'，名称：'.$name);
+				addlog('文章分类修改，ID：'.$id.'，名称：'.$data['name']);
 				$this->success('恭喜，分类修改成功！');
 				die(0);
 			}
@@ -110,6 +111,6 @@ class CategoryController extends ComController {
 				die(0);
 			}
 		}
-		$this->error('参数错误！');
+		$this->success('恭喜，操作成功！');
 	}
 }

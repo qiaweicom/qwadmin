@@ -11,7 +11,6 @@
 
 namespace Qwadmin\Controller;
 use Qwadmin\Controller\ComController;
-use Think\Auth;
 class IndexController extends ComController {
     public function index(){
 		

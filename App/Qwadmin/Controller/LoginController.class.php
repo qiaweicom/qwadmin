@@ -22,7 +22,7 @@ class LoginController extends BaseController {
 		if (ctype_alnum($identifier) && ctype_alnum($token)) {
 			$user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier'=>$identifier))->find();
 			if($user) {
-				if($token == $user['token'] && $user['identifier'] == password($user['uid'].md5($user['user'].$salt))){
+				if($token == $user['token'] && $user['identifier'] == password($user['uid'].md5($user['user'].$user['salt']))){
 					$flag = true;
 					$this->USER = $user;
 				}
