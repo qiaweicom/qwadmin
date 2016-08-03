@@ -163,8 +163,9 @@ class MemberController extends ComController {
 			addlog('新增会员，会员UID：'.$uid);
 		}else{
 			M('auth_group_access')->data(array('group_id'=>$group_id))->where("uid=$uid")->save();
-			M('member')->data($data)->where("uid=$uid")->save();
 			addlog('编辑会员信息，会员UID：'.$uid);
+			M('member')->data($data)->where("uid=$uid")->save();
+
 		}
 		$this->success('操作成功！');
 	}
