@@ -1,54 +1,56 @@
 <?php
 /**
-*
-* °æÈ¨ËùÓÐ£ºÇ¡Î¬ÍøÂç<qwadmin.qiawei.com>
-* ×÷    Õß£ºº®´¨<hanchuan@qiawei.com>
-* ÈÕ    ÆÚ£º2015-09-17
-* °æ    ±¾£º1.0.0
-* ¹¦ÄÜËµÃ÷£ººóÌ¨¹«¹²ÎÄ¼þ¡£
-*
-**/
+ *
+ * ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ð£ï¿½Ç¡Î¬ï¿½ï¿½ï¿½ï¿½<qwadmin.qiawei.com>
+ * ï¿½ï¿½    ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½<hanchuan@qiawei.com>
+ * ï¿½ï¿½    ï¿½Ú£ï¿½2015-09-17
+ * ï¿½ï¿½    ï¿½ï¿½ï¿½ï¿½1.0.0
+ * ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+ *
+ **/
 
 /**
-*
-* º¯Êý£ºÈÕÖ¾¼ÇÂ¼
-* @param  string $log   ÈÕÖ¾ÄÚÈÝ¡£
-* @param  string $name £¨¿ÉÑ¡£©ÓÃ»§Ãû¡£
-*
-**/
-function addlog($log,$name=false){
-	$Model = M('log');
-	if(!$name){
-		$auth = cookie('auth');
-		list($identifier, $token) = explode(',', $auth);
-		if (ctype_alnum($identifier) && ctype_alnum($token)) {
-			$user = M('member')->field('user')->where(array('identifier'=>$identifier))->find();
-			$data['name'] = $user['user'];
-		}else{
-			$data['name'] = '';
-		}
-	}else{
-		$data['name'] = $name;
-	}
-	$data['t'] = time();
-	$data['ip'] = $_SERVER["REMOTE_ADDR"];
-	$data['log'] = $log;
-	$Model->data($data)->add();
+ *
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½Â¼
+ * @param  string $log ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½Ý¡ï¿½
+ * @param  string $name ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½
+ *
+ **/
+function addlog($log, $name = false)
+{
+    $Model = M('log');
+    if (!$name) {
+        $auth = cookie('auth');
+        list($identifier, $token) = explode(',', $auth);
+        if (ctype_alnum($identifier) && ctype_alnum($token)) {
+            $user = M('member')->field('user')->where(array('identifier' => $identifier))->find();
+            $data['name'] = $user['user'];
+        } else {
+            $data['name'] = '';
+        }
+    } else {
+        $data['name'] = $name;
+    }
+    $data['t'] = time();
+    $data['ip'] = $_SERVER["REMOTE_ADDR"];
+    $data['log'] = $log;
+    $Model->data($data)->add();
 }
 
 
 /**
-*
-* º¯Êý£º»ñÈ¡ÓÃ»§ÐÅÏ¢
-* @param  int $uid      ÓÃ»§ID¡£
-* @param  string $name  Êý¾ÝÁÐ£¨Èç£º'uid'¡¢'uid,user'£©
-*
-**/
-function member($uid,$field=false) {
-	$model = M('Member');
-	if($field){
-		return $model ->field($field)-> where(array('uid'=>$uid)) -> find();
-	}else{
-		return $model -> where(array('uid'=>$uid)) -> find();
-	}
+ *
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½ï¿½Ï¢
+ * @param  int $uid ï¿½Ã»ï¿½IDï¿½ï¿½
+ * @param  string $name ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ç£º'uid'ï¿½ï¿½'uid,user'ï¿½ï¿½
+ *
+ **/
+function member($uid, $field = false)
+{
+    $model = M('Member');
+    if ($field) {
+        return $model->field($field)->where(array('uid' => $uid))->find();
+    } else {
+        return $model->where(array('uid' => $uid))->find();
+    }
 }

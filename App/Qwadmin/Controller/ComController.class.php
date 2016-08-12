@@ -21,19 +21,19 @@ class ComController extends BaseController
     public function _initialize()
     {
         C(setting());
-		$flag = false;
+        $flag = false;
         $auth = cookie('auth');
-		list($identifier, $token) = explode(',', $auth);
-		if (ctype_alnum($identifier) && ctype_alnum($token)) {
-			$user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier'=>$identifier))->find();
-			
-			if($user) {
-				if($token == $user['token'] && $user['identifier'] == password($user['uid'].md5($user['user'].$user['salt']))){
-					$flag = true;
-					$this->USER = $user;
-				}
-			}
-		}
+        list($identifier, $token) = explode(',', $auth);
+        if (ctype_alnum($identifier) && ctype_alnum($token)) {
+            $user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier' => $identifier))->find();
+
+            if ($user) {
+                if ($token == $user['token'] && $user['identifier'] == password($user['uid'] . md5($user['user'] . $user['salt']))) {
+                    $flag = true;
+                    $this->USER = $user;
+                }
+            }
+        }
 
         $url = U("login/index");
         if (!$flag) {
@@ -47,7 +47,10 @@ class ComController extends BaseController
         $Auth = new Auth();
         $allow_controller_name = array('Upload');//放行控制器名称
         $allow_action_name = array();//放行函数名称
-        if ($userinfo[0]['group_id'] != 1 && !$Auth->check(CONTROLLER_NAME . '/' . ACTION_NAME, $UID) && !in_array(CONTROLLER_NAME, $allow_controller_name) && !in_array(ACTION_NAME, $allow_action_name)) {
+        if ($userinfo[0]['group_id'] != 1 && !$Auth->check(CONTROLLER_NAME . '/' . ACTION_NAME,
+                $UID) && !in_array(CONTROLLER_NAME, $allow_controller_name) && !in_array(ACTION_NAME,
+                $allow_action_name)
+        ) {
             $this->error('没有权限访问本页面!');
         }
 
