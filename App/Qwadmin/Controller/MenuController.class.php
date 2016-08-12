@@ -72,7 +72,7 @@ class MenuController extends ComController
         $option = $this->getMenu($option);
         $this->assign('option', $option);
         $this->assign('currentmenu', $currentmenu);
-        $this->display();
+        $this->display('form');
     }
 
     public function update()
@@ -104,6 +104,6 @@ class MenuController extends ComController
         $option = M('auth_rule')->order('o ASC')->select();
         $option = $this->getMenu($option);
         $this->assign('option', $option);
-        $this->display();
+        $this->display('form');
     }
 }

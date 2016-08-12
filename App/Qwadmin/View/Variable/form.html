@@ -10,7 +10,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<include file="Public/head" />
-   </head>
+
+</head>
 
 	<body class="no-skin">
 		<include file="Public/header" />
@@ -34,49 +35,32 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 									<form class="form-horizontal" id="form" method="post" action="{:U('update')}">
-									<div class="space-4"></div>
+									<input name="varname" type="hidden" value="{$var.k}">
 									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 标题 </label>
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 变量说明 </label>
 										<div class="col-sm-9">
-											<input type="text" name="title" id="title" placeholder="标题" class="col-xs-10 col-sm-5" value="">
+											<input type="text" name="name" id="name" placeholder="变量说明" class="col-xs-10 col-sm-5" value="{$var.name}">
 											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">标题不能为空。</span>
+												<span class="middle"></span>
 											</span>
 										</div>
 									</div>
-
-									<div class="space-4"></div>
-
 									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 链接地址 </label>
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 变量名称 </label>
 										<div class="col-sm-9">
-											<input type="url" name="url" id="url" placeholder="链接地址" class="col-xs-10 col-sm-5" value="">
+											<input type="text" name="k" id="k" placeholder="变量名称" class="col-xs-10 col-sm-5" value="{$var.k}">
 											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">链接地址。</span>
+												<span class="middle">注意需符合PHP变量名条件，前台调用：<literal>{$Think.CONFIG.变量名称}</literal></span>
 											</span>
 										</div>
 									</div>
-									
 									<div class="space-4"></div>
-									
 									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-4"> 焦点图 </label>
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 变量值 </label>
 										<div class="col-sm-9">
-											<div class="col-xs-10 col-sm-5">{:UpImage("pic",400,100)}</div>
+											<input type="text" name="v" id="v" placeholder="变量值" class="col-xs-10 col-sm-5" value="{$var.v}">
 											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">仅支持jpg、gif、png、bmp、jpeg，且小于1MB。</span>
-											</span>
-										</div>
-									</div>
-										
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 排序 </label>
-										<div class="col-sm-9">
-											<input type="number" name="o" id="o" placeholder="排序" class="col-xs-10 col-sm-5" value="">
-											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">越小越靠前。</span>
+												<span class="middle"></span>
 											</span>
 										</div>
 									</div>
@@ -140,7 +124,6 @@
 				$("#form").submit();
 			});
 		});
-		
 		</script>
 	</body>
 </html>

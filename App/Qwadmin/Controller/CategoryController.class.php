@@ -59,7 +59,7 @@ class CategoryController extends ComController
         $category = $tree->get_tree(0, $str, $currentcategory['pid']);
 
         $this->assign('category', $category);
-        $this->display();
+        $this->display('form');
     }
 
     public function add()
@@ -72,7 +72,7 @@ class CategoryController extends ComController
         $category = $tree->get_tree(0, $str, $pid);
 
         $this->assign('category', $category);
-        $this->display();
+        $this->display('form');
     }
 
     public function update($act = null)
@@ -113,7 +113,7 @@ class CategoryController extends ComController
             $id = M('category')->data($data)->add();
             if ($id) {
                 addlog('新增分类，ID：' . $id . '，名称：' . $data['name']);
-                $this->success('恭喜，新增分类成功！');
+                $this->success('恭喜，新增分类成功！','index');
                 die(0);
             }
         }

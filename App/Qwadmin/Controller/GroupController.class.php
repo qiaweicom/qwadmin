@@ -102,7 +102,7 @@ class GroupController extends ComController
         $this->assign('rule', $rule);
         $this->assign('group', $group);
         $this->assign('nav', array('user', 'grouplist', 'addgroup'));//导航
-        $this->display();
+        $this->display('form');
     }
 
     public function add()
@@ -112,6 +112,6 @@ class GroupController extends ComController
         $rule = M('auth_rule')->field('id,pid,title')->where('status=1')->order('o asc')->select();
         $rule = $this->getMenu($rule);
         $this->assign('rule', $rule);
-        $this->display();
+        $this->display('form');
     }
 }

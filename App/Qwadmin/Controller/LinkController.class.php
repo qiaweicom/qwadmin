@@ -27,7 +27,7 @@ class LinkController extends ComController
     public function add()
     {
 
-        $this->display();
+        $this->display('form');
     }
 
     //新增或修改链接
@@ -37,7 +37,7 @@ class LinkController extends ComController
         $id = intval($id);
         $link = M('links')->where('id=' . $id)->find();
         $this->assign('link', $link);
-        $this->display();
+        $this->display('form');
     }
 
     //删除链接

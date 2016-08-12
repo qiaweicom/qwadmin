@@ -27,7 +27,7 @@ class FlashController extends ComController
     public function add()
     {
 
-        $this->display();
+        $this->display('form');
     }
 
     //修改焦点图
@@ -37,7 +37,7 @@ class FlashController extends ComController
         $id = intval($id);
         $flash = M('flash')->where('id=' . $id)->find();
         $this->assign('flash', $flash);
-        $this->display();
+        $this->display('form');
     }
 
     //删除焦点图

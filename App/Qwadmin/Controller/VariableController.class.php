@@ -25,7 +25,7 @@ class VariableController extends ComController
     public function add()
     {
 
-        $this->display();
+        $this->display('form');
     }
 
     public function edit($k = null)
@@ -36,7 +36,7 @@ class VariableController extends ComController
             $this->error('参数错误！');
         }
         $this->assign('var', $var);
-        $this->display();
+        $this->display('form');
     }
 
     public function del()

@@ -33,12 +33,12 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-									<form class="form-horizontal" id="form" method="post" action="{:U('update')}?id={$flash.id}">
+									<form class="form-horizontal" id="form" method="post" action="{:U('update')}?id={$link.id}">
 									<div class="space-4"></div>
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 标题 </label>
 										<div class="col-sm-9">
-											<input type="text" name="title" id="title" placeholder="标题" class="col-xs-10 col-sm-5" value="{$flash['title']}">
+											<input type="text" name="title" id="title" placeholder="标题" class="col-xs-10 col-sm-5" value="{$link['title']}">
 											<span class="help-inline col-xs-12 col-sm-7">
 												<span class="middle">标题不能为空。</span>
 											</span>
@@ -50,7 +50,7 @@
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 链接地址 </label>
 										<div class="col-sm-9">
-											<input type="url" name="url" id="url" placeholder="链接地址" class="col-xs-10 col-sm-5" value="{$flash['url']}">
+											<input type="url" name="url" id="url" placeholder="链接地址" class="col-xs-10 col-sm-5" value="{$link['url']}">
 											<span class="help-inline col-xs-12 col-sm-7">
 												<span class="middle">链接地址。</span>
 											</span>
@@ -60,9 +60,9 @@
 									<div class="space-4"></div>
 									
 									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-4"> 焦点图 </label>
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-4"> 网站LOGO </label>
 										<div class="col-sm-9">
-											<div class="col-xs-10 col-sm-5">{:UpImage("pic",400,100,$flash['pic'])}</div>
+											<div class="col-xs-10 col-sm-5">{:UpImage("logo",88,31,$link['logo'])}</div>
 											<span class="help-inline col-xs-12 col-sm-7">
 												<span class="middle">仅支持jpg、gif、png、bmp、jpeg，且小于1MB。</span>
 											</span>
@@ -74,7 +74,7 @@
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 排序 </label>
 										<div class="col-sm-9">
-											<input type="number" name="o" id="o" placeholder="排序" class="col-xs-10 col-sm-5" value="{$flash['o']}">
+											<input type="number" name="o" id="o" placeholder="排序" class="col-xs-10 col-sm-5" value="{$link['o']}">
 											<span class="help-inline col-xs-12 col-sm-7">
 												<span class="middle">越小越靠前。</span>
 											</span>

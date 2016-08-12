@@ -24,7 +24,7 @@ class ArticleController extends ComController
         $str = "<option value=\$id \$selected>\$spacer\$name</option>"; //生成的形式
         $category = $tree->get_tree(0, $str, 0);
         $this->assign('category', $category);//导航
-        $this->display();
+        $this->display('form');
     }
 
     public function index($sid = 0, $p = 1)
@@ -92,7 +92,7 @@ class ArticleController extends ComController
         } else {
             $this->error('参数错误！');
         }
-        $this->display();
+        $this->display('form');
     }
 
     public function update($aid = 0)

@@ -114,7 +114,7 @@ class MemberController extends ComController
         $this->assign('usergroup', $usergroup);
 
         $this->assign('member', $member);
-        $this->display();
+        $this->display('form');
     }
 
     public function update($ajax = '')
@@ -180,6 +180,6 @@ class MemberController extends ComController
 
         $usergroup = M('auth_group')->field('id,title')->select();
         $this->assign('usergroup', $usergroup);
-        $this->display();
+        $this->display('form');
     }
 }
