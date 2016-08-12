@@ -68,7 +68,7 @@
 															<p>服务器：<?php echo php_uname('s');?></p>
 															<p>PHP运行方式：<?php echo php_sapi_name();?></p>
 															<p>服务器IP：<?php echo GetHostByName($_SERVER['SERVER_NAME']);?></p>
-															<p>程序版本：<?php echo THINK_VERSION ?>&nbsp;&nbsp;<a href="javascript:;" id="update">检查更新</a>&nbsp;&nbsp;<span id="upmsg"></span></p>
+															<p>程序版本：{$Think.CONFIG.Version}&nbsp;<a href="javascript:;" id="update">检查更新</a>&nbsp;&nbsp;<span id="upmsg"></span></p>
 
 														</div>
 													</div>
@@ -196,7 +196,7 @@
 				$("#upmsg").addClass("ace-icon fa fa-refresh fa-spin blue");
 				$.ajax({
 					type: 'GET',
-					url: '{$Think.CONFIG.UPDATE_URL}?v=<?php echo THINK_VERSION ?>&callback=?',
+					url: '{$Think.CONFIG.UPDATE_URL}?v={$Think.CONFIG.Version}&callback=?',
 					success :function(json){
 						if(json.result=='no'){
 							$("#upmsg").html("目前还没有适合您当前版本的更新！").removeClass();
