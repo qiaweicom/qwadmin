@@ -37,10 +37,10 @@
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 用户名 </label>
 										<div class="col-sm-9">
-											<input type="text" readonly class="rcol-xs-10 col-sm-5" value="{$member.user}">
+											<input type="text" <if condition="$member['uid'] eq 1">readonly<else/> name="user"</if>  class="rcol-xs-10 col-sm-5" value="{$member.user}">
 											<input type="hidden" name="uid" value="{$member['uid']}">
 											<span class="help-inline col-xs-12 col-sm-7">
-												<span class="middle">无法修改</span>
+											<if condition="$member['uid'] eq 1"><span class="middle">无法修改</span></if>
 											</span>
 										</div>
 									</div>
@@ -114,10 +114,12 @@
 										<label class="col-sm-1 control-label no-padding-right" for="id-date-picker-1">生日</label>
 										<div class="col-xs-9 col-sm-9">
 											<div class="input-group col-xs-5">
-												<input class="form-control" id="birthday" name="birthday" value="{$member['birthday']|date="Y-m-d",###}" type="text" data-date-format="dd-mm-yyyy" />
+
+												<input class="form-control" id="birthday" name="birthday" value="<if condition="$member['birthday'] neq '' ">{$member['birthday']|date="Y-m-d",###}</if>" type="text" data-date-format="dd-mm-yyyy" />
 												<span class="input-group-addon">
 													<i class="ace-icon fa fa-calendar bigger-110"></i>
 												</span>
+
 											</div>
 										</div>
 									</div>
