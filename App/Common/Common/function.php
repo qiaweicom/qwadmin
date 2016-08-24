@@ -16,9 +16,9 @@ function UpImage($callBack = "image", $width = 100, $height = 100, $image = "")
          <input type="hidden" name="' . $callBack . '" id="' . $callBack . '">';
 }
 
-function BatchImage($callBack = "image", $height = 300, $image = "")
+function BatchImage($callBack = "image",$width = 100, $height = 100, $image = "")
 {
-    echo '<iframe scrolling="no" frameborder="0" border="0" onload="this.height=this.contentWindow.document.body.scrollHeight;this.width=this.contentWindow.document.body.scrollWidth;" src="' . U('Upload/batchpic') . '?BackCall=' . $callBack . '&Img=' . $image . '"></iframe>
+    echo '<iframe scrolling="no" frameborder="0" border="0" width=100% onload="this.height=this.contentWindow.document.body.scrollHeight;" src="' . U('Upload/batchpic') . '?BackCall=' . $callBack . '&Img=' . $image . '"></iframe>
 		<input type="hidden" name="' . $callBack . '" id="' . $callBack . '">';
 }
 
