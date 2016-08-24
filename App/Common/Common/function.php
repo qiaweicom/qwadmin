@@ -28,19 +28,33 @@ function BatchImage($callBack = "image", $height = 300, $image = "")
  * @param  string $k      可选，配置名称
  * @return array          用户数据
 */
-function setting($k = '')
+function setting($k = 'all')
 {
-    if ($k == '') {
-        $setting = M('setting')->field('k,v')->select();
-        foreach ($setting as $k => $v) {
+    $cache = S($k);
+    //如果缓存不为空直接返回
+    if(null != $cache){
+        return $cache;
+    }
+    $data = '';
+    $setting = M('setting');
+    //判断是否查询全部设置项
+    if ($k == 'all') {
+        $setting =$setting->field('k,v')->select();
+        foreach ($setting as  $v) {
             $config[$v['k']] = $v['v'];
         }
-        return $config;
+        $data = $config;
+
     } else {
-        $model = M('setting');
-        $result = $model->where("k='{$k}'")->find();
-        return $result['v'];
+        $result = $setting->where("k='{$k}'")->find();
+        $data = $result['v'];
+
     }
+    //建立缓存
+    if($data){
+        S($k,$data);
+    }
+    return $data;
 }
 
 /**
