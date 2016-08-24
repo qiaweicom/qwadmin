@@ -11,10 +11,11 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{:U('index/index')}">首页</a>
             </li>
-
-            <li>
-                <a href="#">{$current['ptitle']}</a>
-            </li>
+            <present name="current['ptitle']">
+                <li>
+                    <a href="#">{$current['ptitle']}</a>
+                </li>
+            </present>
             <li class="active">{$current['title']}</li>
         </ul><!-- /.breadcrumb -->
     </div>
