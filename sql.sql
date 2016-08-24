@@ -336,7 +336,7 @@ CREATE TABLE `qw_setting` (
 
 LOCK TABLES `qw_setting` WRITE;
 /*!40000 ALTER TABLE `qw_setting` DISABLE KEYS */;
-INSERT INTO `qw_setting` VALUES ('sitename','恰维网络',0,''),('title','QWADMIN',0,''),('keywords','关键词',0,''),('description','网站描述',0,''),('footer','2016©恰维网络',0,''),('test','测试',1,'测试变量');
+INSERT INTO `qw_setting` VALUES ('sitename','QWADMIN',0,''),('title','恰维网络',0,''),('keywords','关键词',0,''),('description','网站描述',0,''),('footer','2016©恰维网络',0,''),('test','测试',1,'测试变量');
 /*!40000 ALTER TABLE `qw_setting` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
