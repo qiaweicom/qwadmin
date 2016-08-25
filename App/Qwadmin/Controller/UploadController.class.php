@@ -76,7 +76,7 @@ class UploadController extends ComController
         $pinfo = pathinfo($file["name"]);
         $ftype = $pinfo['extension'];
         //@todo 有可能生成同一个文件名，需要重新优化
-        $imgname = date("YmdHis").rand(0000,9999).$ftype;
+        $imgname = date("YmdHis").rand(0000,9999).".".$ftype;
         $destination = $destination_folder . $imgname;
         if (file_exists($destination)) {
             echo "同名文件已经存在了";
