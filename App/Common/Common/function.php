@@ -127,6 +127,8 @@ function category_get_sons($sid,&$array=[]){
     foreach($categorys as $category){
         category_get_sons($category['id'],$array);
     }
-    return $array;
+    $data = $array;
+    unset($array);
+    return $data;
 
 }
