@@ -30,20 +30,38 @@ class ArticleController extends ComController
     public function index($sid = 0, $p = 1)
     {
 
-        $sid = intval($sid);
         $p = intval($p) > 0 ? $p : 1;
 
         $article = M('article');
         $pagesize = 20;#每页数量
         $offset = $pagesize * ($p - 1);//计算记录偏移量
         $prefix = C('DB_PREFIX');
+        $sid = isset($_GET['sid']) ? $_GET['sid'] : '';
+        $keyword = isset($_GET['keyword']) ? htmlentities($_GET['keyword']) : '';
+        $order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
+        $where = '1 = 1 ';
         if ($sid) {
-            $where = "{$prefix}article.sid=$sid";
-        } else {
-            $where = '';
+            $where .= "and {$prefix}article.sid=$sid ";
         }
+        if($keyword){
+            $where .= "and {$prefix}article.title like '%{$keyword}%' ";
+        }
+        //默认按照时间降序
+        $orderby = "t desc";
+        if($order == "asc"){
+
+            $orderby = "t asc";
+        }
+        //获取栏目分类
+        $category = M('category')->field('id,pid,name')->order('o asc')->select();
+        $tree = new Tree($category);
+        $str = "<option value=\$id \$selected>\$spacer\$name</option>"; //生成的形式
+        $category = $tree->get_tree(0, $str, $sid);
+        $this->assign('category', $category);//导航
+
+
         $count = $article->where($where)->count();
-        $list = $article->field("{$prefix}article.*,{$prefix}category.name")->where($where)->order("{$prefix}article.aid desc")->join("{$prefix}category ON {$prefix}category.id = {$prefix}article.sid")->limit($offset . ',' . $pagesize)->select();
+        $list = $article->field("{$prefix}article.*,{$prefix}category.name")->where($where)->order($orderby)->join("{$prefix}category ON {$prefix}category.id = {$prefix}article.sid")->limit($offset . ',' . $pagesize)->select();
 
         $page = new \Think\Page($count, $pagesize);
         $page = $page->show();
