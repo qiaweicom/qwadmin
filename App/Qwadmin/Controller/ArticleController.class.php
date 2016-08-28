@@ -43,12 +43,12 @@ class ArticleController extends ComController
         if ($sid) {
             $where .= "and {$prefix}article.sid=$sid ";
         }
-        if($keyword){
+        if ($keyword) {
             $where .= "and {$prefix}article.title like '%{$keyword}%' ";
         }
         //默认按照时间降序
         $orderby = "t desc";
-        if($order == "asc"){
+        if ($order == "asc") {
 
             $orderby = "t asc";
         }

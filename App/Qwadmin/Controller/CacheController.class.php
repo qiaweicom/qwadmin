@@ -23,7 +23,8 @@ class CacheController extends ComController
 
     //递归删除缓存信息
 
-    public function rmdirr($dirname) {
+    public function rmdirr($dirname)
+    {
         if (!file_exists($dirname)) {
             return false;
         }
@@ -31,7 +32,7 @@ class CacheController extends ComController
             return unlink($dirname);
         }
         $dir = dir($dirname);
-        if($dir){
+        if ($dir) {
             while (false !== $entry = $dir->read()) {
                 if ($entry == '.' || $entry == '..') {
                     continue;

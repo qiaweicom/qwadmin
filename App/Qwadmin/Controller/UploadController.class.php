@@ -76,7 +76,7 @@ class UploadController extends ComController
         $pinfo = pathinfo($file["name"]);
         $ftype = $pinfo['extension'];
         //@todo 有可能生成同一个文件名，需要重新优化
-        $imgname = date("YmdHis").rand(0000,9999).".".$ftype;
+        $imgname = date("YmdHis") . rand(0000, 9999) . "." . $ftype;
         $destination = $destination_folder . $imgname;
         if (file_exists($destination)) {
             echo "同名文件已经存在了";
@@ -98,7 +98,7 @@ class UploadController extends ComController
         }
         $Path = null;
         if ($_FILES['uploadimg']) {
-            foreach ($_FILES['uploadimg']['name'] as $key => $value ){
+            foreach ($_FILES['uploadimg']['name'] as $key => $value) {
                 $fileinfo = array(
                     'name' => $_FILES['uploadimg']['name'][$key],
                     'type' => $_FILES['uploadimg']['type'][$key],
@@ -108,7 +108,7 @@ class UploadController extends ComController
                 );
 
                 $filename = $this->saveimg($fileinfo);
-                if ($filename){
+                if ($filename) {
                     array_push($Img, $filename);
                 }
 
@@ -116,7 +116,7 @@ class UploadController extends ComController
             }
 //          $Img=$this->saveimg($_FILES['img']);
         }
-        $ImgStr = implode("|",$Img);
+        $ImgStr = implode("|", $Img);
         $BackCall = I('BackCall');
         $Width = I('u');
         $Height = I('Height');

@@ -11,8 +11,6 @@
 
 namespace Qwadmin\Controller;
 
-use Qwadmin\Controller\ComController;
-
 class IndexController extends ComController
 {
     public function index()

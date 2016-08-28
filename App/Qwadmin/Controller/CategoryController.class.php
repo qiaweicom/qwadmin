@@ -113,7 +113,7 @@ class CategoryController extends ComController
             $id = M('category')->data($data)->add();
             if ($id) {
                 addlog('新增分类，ID：' . $id . '，名称：' . $data['name']);
-                $this->success('恭喜，新增分类成功！','index');
+                $this->success('恭喜，新增分类成功！', 'index');
                 die(0);
             }
         }
