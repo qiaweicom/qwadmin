@@ -30,6 +30,7 @@ class ArticleController extends ComController
     public function index($sid = 0, $p = 1)
     {
 
+
         $p = intval($p) > 0 ? $p : 1;
 
         $article = M('article');
@@ -41,7 +42,9 @@ class ArticleController extends ComController
         $order = isset($_GET['order']) ? $_GET['order'] : 'DESC';
         $where = '1 = 1 ';
         if ($sid) {
-            $where .= "and {$prefix}article.sid=$sid ";
+            $sids_array = category_get_sons($sid);
+            $sids = implode(',',$sids_array);
+            $where .= "and {$prefix}article.sid in ($sids) ";
         }
         if ($keyword) {
             $where .= "and {$prefix}article.title like '%{$keyword}%' ";
