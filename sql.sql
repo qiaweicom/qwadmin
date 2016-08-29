@@ -305,7 +305,7 @@ CREATE TABLE `qw_member` (
 
 LOCK TABLES `qw_member` WRITE;
 /*!40000 ALTER TABLE `qw_member` DISABLE KEYS */;
-INSERT INTO `qw_member` VALUES (1,'admin','/Public/attached/201601/1453389194.png',1,1420128000,'13800138000','331349451','xieyanwei@qq.com','66d6a1c8748025462128dc75bf5ae8d1',1442505600,'','','');
+INSERT INTO `qw_member` VALUES (1,'admin','/Public/attached/201601/1453389194.png',1,1420128000,'13800138000','331349451','xieyanwei@qq.com','66d6a1c8748025462128dc75bf5ae8d1',1442505600);
 
 /*!40000 ALTER TABLE `qw_member` ENABLE KEYS */;
 UNLOCK TABLES;
