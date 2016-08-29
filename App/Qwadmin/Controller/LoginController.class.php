@@ -11,26 +11,13 @@
 
 namespace Qwadmin\Controller;
 
-use Common\Controller\BaseController;
+use Qwadmin\Controller\ComController;
 
-class LoginController extends BaseController
+class LoginController extends ComController
 {
     public function index()
     {
-
-
-        $flag = false;
-        $auth = cookie('auth');
-        list($identifier, $token) = explode(',', $auth);
-        if (ctype_alnum($identifier) && ctype_alnum($token)) {
-            $user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier' => $identifier))->find();
-            if ($user) {
-                if ($token == $user['token'] && $user['identifier'] == password($user['uid'] . md5($user['user'] . $user['salt']))) {
-                    $flag = true;
-                    $this->USER = $user;
-                }
-            }
-        }
+        $flag = $this->check_login();
         if ($flag) {
             $this->error('您已经登录,正在跳转到主页', U("index/index"));
         }
@@ -58,17 +45,13 @@ class LoginController extends BaseController
         $user = $model->field('uid,user')->where(array('user' => $username, 'password' => $password))->find();
 
         if ($user) {
-            $token = password(uniqid(rand(), true));
-            $salt = random(10);
-            $identifier = password($user['uid'] . md5($user['user'] . $salt));
-            $auth = $identifier . ',' . $token;
-
-            M('member')->data(array(
-                'identifier' => $identifier,
-                'token' => $token,
-                'salt' => $salt
-            ))->where(array('uid' => $user['uid']))->save();
-
+            $salt = C("COOKIE_SALT");
+            $ip = get_client_ip();
+            $ua = $_SERVER['HTTP_USER_AGENT'];
+            session_start();
+            session('uid',$user['uid']);
+            //加密cookie信息
+            $auth = password($user['uid'].$user['user'].$ip.$ua.$salt);
             if ($remember) {
                 cookie('auth', $auth, 3600 * 24 * 365);//记住我
             } else {
