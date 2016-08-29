@@ -20,21 +20,19 @@ class ComController extends BaseController
 
     public function _initialize()
     {
+
         C(setting());
-        $flag = false;
-        $auth = cookie('auth');
-        list($identifier, $token) = explode(',', $auth);
-        if (ctype_alnum($identifier) && ctype_alnum($token)) {
-            $user = M('member')->field('uid,user,identifier,token,salt')->where(array('identifier' => $identifier))->find();
-
-            if ($user) {
-                if ($token == $user['token'] && $user['identifier'] == password($user['uid'] . md5($user['user'] . $user['salt']))) {
-                    $flag = true;
-                    $this->USER = $user;
-                }
-            }
+        if (!C("COOKIE_SALT")) {
+            $this->error('请配置COOKIE_SALT信息');
         }
-
+        /**
+         * 不需要登录控制器
+         */
+        if (in_array(CONTROLLER_NAME, array("Login"))) {
+            return true;
+        }
+        //检测是否登录
+        $flag =  $this->check_login();
         $url = U("login/index");
         if (!$flag) {
             header("Location: {$url}");
@@ -97,5 +95,26 @@ class ComController extends BaseController
             }
         }
         return $tree;
+    }
+
+    public function check_login(){
+        session_start();
+        $flag = false;
+        $salt = C("COOKIE_SALT");
+        $ip = get_client_ip();
+        $ua = $_SERVER['HTTP_USER_AGENT'];
+        $auth = cookie('auth');
+        $uid = session('uid');
+        if ($uid) {
+            $user = M('member')->where(array('uid' => $uid))->find();
+
+            if ($user) {
+                if ($auth ==  password($uid.$user['user'].$ip.$ua.$salt)) {
+                    $flag = true;
+                    $this->USER = $user;
+                }
+            }
+        }
+        return $flag;
     }
 }

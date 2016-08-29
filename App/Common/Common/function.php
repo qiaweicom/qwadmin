@@ -117,3 +117,18 @@ function random($length = 6, $type = 'string', $convert = 0)
     }
     return $code;
 }
+
+//获取所有的子级id
+function category_get_sons($sid,&$array=[]){
+    //获取当前sid下的所有子栏目的id
+    $categorys = M("category")->where("pid = {$sid}")->select();
+
+    $array=array_merge($array,array($sid));
+    foreach($categorys as $category){
+        category_get_sons($category['id'],$array);
+    }
+    $data = $array;
+    unset($array);
+    return $data;
+
+}

@@ -15,8 +15,7 @@ class MemberController extends ComController
 {
     public function index()
     {
-
-
+        
         $p = isset($_GET['p']) ? intval($_GET['p']) : '1';
         $field = isset($_GET['field']) ? $_GET['field'] : '';
         $keyword = isset($_GET['keyword']) ? htmlentities($_GET['keyword']) : '';
@@ -53,8 +52,6 @@ class MemberController extends ComController
         $count = $user->count();
 
         $list = $user->field("{$prefix}member.*,{$prefix}auth_group.id as gid,{$prefix}auth_group.title")->order($order)->join("{$prefix}auth_group_access ON {$prefix}member.uid = {$prefix}auth_group_access.uid")->join("{$prefix}auth_group ON {$prefix}auth_group.id = {$prefix}auth_group_access.group_id")->where($where)->limit($offset . ',' . $pagesize)->select();
-
-
         //$user->getLastSql();
         $page = new \Think\Page($count, $pagesize);
         $page = $page->show();
@@ -137,19 +134,14 @@ class MemberController extends ComController
             $data['password'] = password($password);
         }
         $head = I('post.head', '', 'strip_tags');
-        $token = password(uniqid(rand(), true));
-        $salt = random(10);
-        $identifier = password($user['uid'] . md5($user['user'] . $salt));
-        $auth = $identifier . ',' . $token;
         $data['sex'] = isset($_POST['sex']) ? intval($_POST['sex']) : 0;
         $data['head'] = $head ? $head : '';
         $data['birthday'] = isset($_POST['birthday']) ? strtotime($_POST['birthday']) : 0;
         $data['phone'] = isset($_POST['phone']) ? trim($_POST['phone']) : '';
         $data['qq'] = isset($_POST['qq']) ? trim($_POST['qq']) : '';
         $data['email'] = isset($_POST['email']) ? trim($_POST['email']) : '';
-        $data['identifier'] = $identifier;
-        $data['token'] = $token;
-        $data['salt'] = $salt;
+
+
         $data['t'] = time();
         if (!$uid) {
             if ($user == '') {

@@ -20,10 +20,10 @@ function addlog($log, $name = false)
 {
     $Model = M('log');
     if (!$name) {
-        $auth = cookie('auth');
-        list($identifier, $token) = explode(',', $auth);
-        if (ctype_alnum($identifier) && ctype_alnum($token)) {
-            $user = M('member')->field('user')->where(array('identifier' => $identifier))->find();
+        session_start();
+        $uid = session('uid');
+        if ($uid) {
+            $user = M('member')->field('user')->where(array('uid' => $uid))->find();
             $data['name'] = $user['user'];
         } else {
             $data['name'] = '';
@@ -40,9 +40,7 @@ function addlog($log, $name = false)
 
 /**
  *
- * ��������ȡ�û���Ϣ
- * @param  int $uid �û�ID��
- * @param  string $name �����У��磺'uid'��'uid,user'��
+ * 获取用户信息
  *
  **/
 function member($uid, $field = false)
