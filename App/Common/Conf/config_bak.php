@@ -10,6 +10,7 @@
  **/
 return array(
     'URL' => 'http://www.example.com', //网站根URL
+    'COOKIE_SALT' => '', //设置cookie加密密钥
     //数据库链接配置
     'DB_TYPE' => 'mysql', // 数据库类型
     'DB_HOST' => 'localhost', // 服务器地址
