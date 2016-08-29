@@ -1,21 +1,10 @@
 <?php
 /**
- *
- * ��Ȩ���У�ǡά����<qwadmin.qiawei.com>
- * ��    �ߣ�����<hanchuan@qiawei.com>
- * ��    �ڣ�2015-09-17
- * ��    ����1.0.0
- * ����˵������̨�����ļ���
- *
- **/
+ * 增加日志
+ * @param $log
+ * @param bool $name
+ */
 
-/**
- *
- * ��������־��¼
- * @param  string $log ��־���ݡ�
- * @param  string $name ����ѡ���û�����
- *
- **/
 function addlog($log, $name = false)
 {
     $Model = M('log');
