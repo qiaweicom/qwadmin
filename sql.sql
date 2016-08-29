@@ -295,9 +295,6 @@ CREATE TABLE `qw_member` (
   `email` varchar(255) NOT NULL COMMENT '邮箱',
   `password` varchar(32) NOT NULL,
   `t` int(10) unsigned NOT NULL COMMENT '注册时间',
-  `identifier` VARCHAR(32) NOT NULL,
-  `token` VARCHAR(32) NOT NULL,
-  `salt` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
