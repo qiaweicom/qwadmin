@@ -53,7 +53,7 @@ class CategoryController extends ComController
         $currentcategory = M('category')->where('id=' . $id)->find();
         $this->assign('currentcategory', $currentcategory);
 
-        $category = M('category')->field('id,pid,name')->order('o asc')->select();
+        $category = M('category')->field('id,pid,name')->where("id <> {$id}")->order('o asc')->select();
         $tree = new Tree($category);
         $str = "<option value=\$id \$selected>\$spacer\$name</option>"; //生成的形式
         $category = $tree->get_tree(0, $str, $currentcategory['pid']);
