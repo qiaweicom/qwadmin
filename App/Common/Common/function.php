@@ -119,7 +119,7 @@ function random($length = 6, $type = 'string', $convert = 0)
 }
 
 //获取所有的子级id
-function category_get_sons($sid,&$array=[]){
+function category_get_sons($sid,&$array=array()){
     //获取当前sid下的所有子栏目的id
     $categorys = M("category")->where("pid = {$sid}")->select();
 
