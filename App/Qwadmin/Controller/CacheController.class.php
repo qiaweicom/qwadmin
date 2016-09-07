@@ -17,6 +17,8 @@ class CacheController extends ComController
     //清除缓存
     public function clear()
     {
+        $cache = \Think\Cache::getInstance();
+        $cache->clear();
         $this->rmdirr(RUNTIME_PATH);
         $this->success('系统缓存清除成功！');
     }
