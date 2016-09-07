@@ -35,6 +35,9 @@ class SettingController extends ComController
         foreach ($data as $k => $v) {
             $Model->data(array('v' => $v))->where("k='{$k}'")->save();
         }
+        //清除旧的缓存数据
+        $cache = \Think\Cache::getInstance();
+        $cache->clear();
         addlog('修改网站配置。');
         $this->success('恭喜，网站配置成功！');
     }
