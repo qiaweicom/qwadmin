@@ -114,4 +114,32 @@ class GroupController extends ComController
         $this->assign('rule', $rule);
         $this->display('form');
     }
+
+    public function status()
+    {
+
+        $id = I('id');
+        if (!$id) {
+            $this->error('参数错误！');
+        }
+        if ($id == 1) {
+            $this->error('此用户组不可变更状态！');
+        }
+        $group = M('auth_group')->where('id=' . $id)->find();
+        if (!$group) {
+            $this->error('参数错误！');
+        }
+        $status = $group['status'];
+        if ($status == 1) {
+           $res = M('auth_group')->data(array('status' => 0))->where('id=' . $id)->save();
+        }
+        if ($status != 1 ) {
+            $res = M('auth_group')->data(array('status' => 1))->where('id=' . $id)->save();
+        }
+        if ($res) {
+            $this->success('恭喜，更新状态成功！');
+        } else {
+            $this->error('更新失败！');
+        }
+    }
 }
