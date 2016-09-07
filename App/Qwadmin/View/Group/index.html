@@ -45,9 +45,9 @@
                                         </td>
                                         <td>{$val['title']}</td>
                                         <td>
-                                            <if condition="$val['status'] eq 1"><a href="" title="点击禁用">启用</a>
+                                            <if condition="$val['status'] eq 1"><a href="{:U('status',array('id'=>$val['id']))}" title="点击禁用">启用</a>
                                                 <else/>
-                                                <a href="" title="点击启用">启用</a></if>
+                                                <a href="{:U('status',array('id'=>$val['id']))}" title="点击启用">禁用</a></if>
                                         </td>
                                         <td class="center"><a href="{:U('edit')}?id={$val['id']}">修改</a></td>
                                     </tr>
