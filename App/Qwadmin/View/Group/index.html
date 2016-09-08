@@ -46,7 +46,7 @@
                                         <td>{$val['title']}</td>
                                         <td>
                                             <if condition="$val['id'] eq 1 "> 启用
-                                            <elseif  condition="$val['status'] eq 1 and $val['id'] eq 1" /><a href="{:U('status',array('id'=>$val['id']))}" title="点击禁用">启用</a>
+                                            <elseif  condition="$val['status'] eq 1" /><a href="{:U('status',array('id'=>$val['id']))}" title="点击禁用">启用</a>
                                                 <else />
                                                 <a href="{:U('status',array('id'=>$val['id']))}" title="点击启用">禁用</a>
                                             </if>
