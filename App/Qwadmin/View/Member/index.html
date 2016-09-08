@@ -28,16 +28,16 @@
                                 <a class="btn btn-info" href="{:U('add')}" value="">新增</a>
                                 <label class="inline">用户搜索</label>
                                 <select name="field" class="form-control">
-                                    <option value="user">用户名</option>
-                                    <option value="phone">电话</option>
-                                    <option value="qq">QQ</option>
-                                    <option value="email">邮箱</option>
+                                    <option <if condition="I('field') eq user">selected</if> value="user">用户名</option>
+                                    <option <if condition="I('field') eq phone">selected</if> value="phone">电话</option>
+                                    <option <if condition="I('field') eq qq">selected</if> value="qq">QQ</option>
+                                    <option <if condition="I('field') eq email">selected</if> value="email">邮箱</option>
                                 </select>
-                                <input type="text" name="keyword" class="form-control">
+                                <input type="text" name="keyword" value="{:I(keyword)}" class="form-control">
                                 <label class="inline">&nbsp;&nbsp;排序：</label>
                                 <select name="order" class="form-control">
-                                    <option value="asc">注册时间升</option>
-                                    <option value="desc">注册时间降</option>
+                                    <option <if condition="I('order') eq asc">selected</if> value="asc">注册时间升</option>
+                                    <option <if condition="I('order') eq desc">selected</if> value="desc">注册时间降</option>
                                 </select>
                                 <button type="submit" class="btn btn-purple btn-sm">
                                     <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
