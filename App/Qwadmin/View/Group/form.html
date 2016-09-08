@@ -35,9 +35,8 @@
 											</span>
                                 </div>
                             </div>
-
+                            <if condition="$group.id neq 1">
                             <div class="space-4"></div>
-
                             <div class="form-group">
                                 <label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 是否启用 </label>
                                 <div class="control-label no-padding-left col-sm-1">
@@ -52,6 +51,9 @@
 												<span class="middle">YES，启用；NO，禁用</span>
 										</span>
                             </div>
+                             <else />
+                                <input name="status" id="status" value ="on" type="hidden" />
+                             </if>
                             <div class="space-4"></div>
                             <if condition="$group.id neq 1">
                                 <div class="form-group">

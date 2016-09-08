@@ -54,6 +54,10 @@ class GroupController extends ComController
             } else {
                 $data['status'] = 0;
             }
+            //如果是超级管理员一直都是启用状态
+            if ($id == 1) {
+                $data['status'] = 1;
+            }
 
             $rules = isset($_POST['rules']) ? $_POST['rules'] : 0;
             if (is_array($rules)) {
