@@ -49,9 +49,20 @@ class MemberController extends ComController
         $user = M('member');
         $pagesize = 10;#每页数量
         $offset = $pagesize * ($p - 1);//计算记录偏移量
-        $count = $user->count();
+        $count = $user->field("{$prefix}member.*,{$prefix}auth_group.id as gid,{$prefix}auth_group.title")
+            ->order($order)
+            ->join("{$prefix}auth_group_access ON {$prefix}member.uid = {$prefix}auth_group_access.uid")
+            ->join("{$prefix}auth_group ON {$prefix}auth_group.id = {$prefix}auth_group_access.group_id")
+            ->where($where)
+            ->count();
 
-        $list = $user->field("{$prefix}member.*,{$prefix}auth_group.id as gid,{$prefix}auth_group.title")->order($order)->join("{$prefix}auth_group_access ON {$prefix}member.uid = {$prefix}auth_group_access.uid")->join("{$prefix}auth_group ON {$prefix}auth_group.id = {$prefix}auth_group_access.group_id")->where($where)->limit($offset . ',' . $pagesize)->select();
+        $list = $user->field("{$prefix}member.*,{$prefix}auth_group.id as gid,{$prefix}auth_group.title")
+            ->order($order)
+            ->join("{$prefix}auth_group_access ON {$prefix}member.uid = {$prefix}auth_group_access.uid")
+            ->join("{$prefix}auth_group ON {$prefix}auth_group.id = {$prefix}auth_group_access.group_id")
+            ->where($where)
+            ->limit($offset . ',' . $pagesize)
+            ->select();
         //$user->getLastSql();
         $page = new \Think\Page($count, $pagesize);
         $page = $page->show();
