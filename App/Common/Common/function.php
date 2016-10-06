@@ -16,7 +16,7 @@ function UpImage($callBack = "image", $width = 100, $height = 100, $image = "")
          <input type="hidden" name="' . $callBack . '" id="' . $callBack . '">';
 }
 
-function BatchImage($callBack = "image",$width = 100, $height = 100, $image = "")
+function BatchImage($callBack = "image", $width = 100, $height = 100, $image = "")
 {
     echo '<iframe scrolling="no" frameborder="0" border="0" width=100% onload="this.height=this.contentWindow.document.body.scrollHeight;" src="' . U('Upload/batchpic') . '?BackCall=' . $callBack . '&Img=' . $image . '"></iframe>
 		<input type="hidden" name="' . $callBack . '" id="' . $callBack . '">';
@@ -32,15 +32,15 @@ function setting($k = 'all')
 {
     $cache = S($k);
     //如果缓存不为空直接返回
-    if(null != $cache){
+    if (null != $cache) {
         return $cache;
     }
     $data = '';
     $setting = M('setting');
     //判断是否查询全部设置项
     if ($k == 'all') {
-        $setting =$setting->field('k,v')->select();
-        foreach ($setting as  $v) {
+        $setting = $setting->field('k,v')->select();
+        foreach ($setting as $v) {
             $config[$v['k']] = $v['v'];
         }
         $data = $config;
@@ -51,8 +51,8 @@ function setting($k = 'all')
 
     }
     //建立缓存
-    if($data){
-        S($k,$data);
+    if ($data) {
+        S($k, $data);
     }
     return $data;
 }
@@ -119,16 +119,69 @@ function random($length = 6, $type = 'string', $convert = 0)
 }
 
 //获取所有的子级id
-function category_get_sons($sid,&$array=array()){
+function category_get_sons($sid, &$array = array())
+{
     //获取当前sid下的所有子栏目的id
     $categorys = M("category")->where("pid = {$sid}")->select();
 
-    $array=array_merge($array,array($sid));
-    foreach($categorys as $category){
-        category_get_sons($category['id'],$array);
+    $array = array_merge($array, array($sid));
+    foreach ($categorys as $category) {
+        category_get_sons($category['id'], $array);
     }
     $data = $array;
     unset($array);
     return $data;
 
 }
+
+
+/**
+ * 获取文章url地址
+ * url结构：ttp://wwww.qwadmin.com/分类/子分类/子分类/id.html
+ * 使用方法：模板中{:articleUrl(array('aid'=>$val['aid']))}
+ *
+ *
+ * @param $data
+ * @return $string
+ */
+function articleUrl($data)
+{
+    //如果数组为空直接返回空字符
+    if (!$data) {
+        return '';
+    }
+    //如果参数错误直接返回空字符
+    if (!isset($data['aid'])) {
+        return '';
+    }
+
+    $aid = (int)$data['aid'];
+
+    //获取文章信息
+    $article = M('article')->where(array('aid' => $aid))->find();
+    //获取当前内容所在分类
+    $category = M('category')->where(array('id' => $article['sid']))->find();
+    //获取当前分类
+    $categoryUrl = $category['dir'];
+    //遍历获取当前文章所在分类的有上级分类并且组合url
+    while ($category['pid'] <> 0) {
+        $category =  M('category')->where(array('id' => $category['pid']))->find();
+        $categoryUrl =  $category['dir'] . "/" . $categoryUrl ;
+        //如果上级分类已经无上级分类则退出
+    }
+
+    $categoryUrl = __ROOT__ ." / ". $categoryUrl;
+    //组合文章url
+    $articleUrl = $categoryUrl . '/' . $aid . ".html";
+    return $articleUrl;
+
+}
+
+
+
+
+
+
+
+
+

@@ -92,6 +92,7 @@ class CategoryController extends ComController
         $data['type'] = I('post.type', 0, 'intval');
         $data['pid'] = I('post.pid', 0, 'intval');
         $data['name'] = I('post.name');
+        $data['dir'] = I('post.dir','',array('strip_tags','trim'));
         $data['seotitle'] = I('post.seotitle', '', 'htmlspecialchars');
         $data['keywords'] = I('post.keywords', '', 'htmlspecialchars');
         $data['description'] = I('post.description', '', 'htmlspecialchars');
