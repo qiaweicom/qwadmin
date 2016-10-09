@@ -170,7 +170,7 @@ function articleUrl($data)
         //如果上级分类已经无上级分类则退出
     }
 
-    $categoryUrl = __ROOT__ ." / ". $categoryUrl;
+    $categoryUrl = __ROOT__ ."/". $categoryUrl;
     //组合文章url
     $articleUrl = $categoryUrl . '/' . $aid . ".html";
     return $articleUrl;
