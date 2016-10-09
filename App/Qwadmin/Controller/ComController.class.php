@@ -82,12 +82,23 @@ class ComController extends BaseController
     {
         $tree = array();
         $tmpMap = array();
-
+        //修复父类设置islink=0，但是子类仍然显示的bug @感谢linshaoneng提供代码
+        foreach( $items as $item ){
+            if( $item['pid']==0 ){
+                $father_ids[] = $item['id'];
+            }
+        }
+        //----
         foreach ($items as $item) {
             $tmpMap[$item[$id]] = $item;
         }
 
         foreach ($items as $item) {
+            //修复父类设置islink=0，但是子类仍然显示的bug by shaoneng @感谢linshaoneng提供代码
+            if( $item['pid']<>0 && !in_array( $item['pid'], $father_ids )){
+                continue;
+            }
+            //----
             if (isset($tmpMap[$item[$pid]])) {
                 $tmpMap[$item[$pid]][$son][] = &$tmpMap[$item[$id]];
             } else {
