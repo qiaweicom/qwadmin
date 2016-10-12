@@ -11,6 +11,8 @@
 
 namespace Qwadmin\Controller;
 
+use Think\Upload;
+
 class UploadController extends ComController
 {
     public function index($type = null)
@@ -23,7 +25,7 @@ class UploadController extends ComController
         $Img = I('Img');
         $Path = null;
         if ($_FILES['img']) {
-            $Img = $this->saveimg($_FILES['img']);
+            $Img = $this->saveimg($_FILES);
         }
         $BackCall = I('BackCall');
         $Width = I('Width');
@@ -44,9 +46,9 @@ class UploadController extends ComController
         $this->display('Uploadpic');
     }
 
-    private function saveimg($file)
+    private function saveimg($files)
     {
-        $uptypes = array(
+        $mimes = array(
             'image/jpeg',
             'image/jpg',
             'image/jpeg',
@@ -56,36 +58,34 @@ class UploadController extends ComController
             'image/bmp',
             'image/x-png'
         );
-        $max_file_size = 2000000;     //上传文件大小限制, 单位BYTE
-        $destination_folder = 'Public/attached/' . date('Ym') . '/'; //上传文件路径
-        if ($max_file_size < $file["size"]) {
-            echo "文件太大!";
-            return null;
+        $exts = array(
+            'jpeg',
+            'jpg',
+            'jpeg',
+            'png',
+            'pjpeg',
+            'gif',
+            'bmp',
+            'x-png'
+        );
+        $upload = new Upload(array(
+            'mimes' => $mimes,
+            'exts' => $exts,
+            'rootPath' => './Public/',
+            'savePath' => 'attached/'.date('Y')."/".date('m')."/",
+            'subName'  =>  array('date', 'd'),
+        ));
+        $info = $upload->upload($files);
+        if(!$info) {// 上传错误提示错误信息
+            $error = $upload->getError();
+            echo "<script>alert('{$error}')</script>";
+        }else{// 上传成功
+            foreach ($info as $item) {
+                $filePath[] = __ROOT__."/Public/".$item['savepath'].$item['savename'];
+            }
+            $ImgStr = implode("|", $filePath);
+            return $ImgStr;
         }
-        if (!in_array($file["type"], $uptypes)) {
-            $name = $file["name"];
-            $type = $file["type"];
-            echo "<script>alert('{$name}文件类型不符!{$type}')</script>";
-            return null;
-        }
-        if (!file_exists($destination_folder)) {
-            mkdir($destination_folder);
-        }
-        $filename = $file["tmp_name"];
-        $image_size = getimagesize($filename);
-        $pinfo = pathinfo($file["name"]);
-        $ftype = $pinfo['extension'];
-        //@todo 有可能生成同一个文件名，需要重新优化
-        $imgname = date("YmdHis") . rand(0000, 9999) . "." . $ftype;
-        $destination = $destination_folder . $imgname;
-        if (file_exists($destination)) {
-            echo "同名文件已经存在了";
-            return null;
-        }
-        if (!move_uploaded_file($filename, $destination)) {
-            return null;
-        }
-        return "/" . $destination;
     }
 
     public function batchpic()
@@ -97,25 +97,16 @@ class UploadController extends ComController
             $Img = explode('|', $ImgStr);
         }
         $Path = null;
-        if ($_FILES['uploadimg']) {
-            foreach ($_FILES['uploadimg']['name'] as $key => $value) {
-                $fileinfo = array(
-                    'name' => $_FILES['uploadimg']['name'][$key],
-                    'type' => $_FILES['uploadimg']['type'][$key],
-                    'tmp_name' => $_FILES['uploadimg']['tmp_name'][$key],
-                    'error' => $_FILES['uploadimg']['error'][$key],
-                    'size' => $_FILES['uploadimg']['size'][$key],
-                );
-
-                $filename = $this->saveimg($fileinfo);
-                if ($filename) {
-                    array_push($Img, $filename);
-                }
-
-
+        $newImg = array();
+        $newImgStr = null;
+        if ($_FILES) {
+            $newImgStr = $this->saveimg($_FILES);
+            if ($newImgStr) {
+                $newImg = explode('|', $newImgStr);
             }
-//          $Img=$this->saveimg($_FILES['img']);
+
         }
+        $Img = array_merge($Img,$newImg);
         $ImgStr = implode("|", $Img);
         $BackCall = I('BackCall');
         $Width = I('u');
