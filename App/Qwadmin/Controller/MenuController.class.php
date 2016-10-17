@@ -36,8 +36,10 @@ class MenuController extends ComController
 
     public function del()
     {
-
         $ids = isset($_REQUEST['ids']) ? $_REQUEST['ids'] : false;
+        if (!$ids) {
+            $this->error('请勾选删除菜单！');
+        }
         //uid为1的禁止删除
         if (is_array($ids)) {
             foreach ($ids as $k => $v) {
