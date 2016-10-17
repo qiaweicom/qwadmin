@@ -49,9 +49,9 @@
                                         <literal>}</literal>
                                     </td>
                                     <td>{$val['v']}</td>
-                                    <td><a href="{:U('edit')}?k={$val['k']}"><i
+                                    <td><a href="{:U('edit',array('k'=>$val['k']))}"><i
                                             class="ace-icon fa fa-pencil bigger-100"></i>修改</a>&nbsp&nbsp;<a
-                                            href="javascript:;" val="{:U('del')}?k={$val['k']}" class="dellink"><i
+                                            href="javascript:;" val="{:U('del',array('k'=>$val['k']))}" class="dellink"><i
                                             class="ace-icon fa fa-trash-o bigger-100 red"></i>删除</a></td>
                                 </tr>
                             </volist>

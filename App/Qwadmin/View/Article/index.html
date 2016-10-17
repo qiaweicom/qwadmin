@@ -65,13 +65,13 @@
                                     <tr>
                                         <td class="center"><input class="aids" type="checkbox" name="aids[]"
                                                                   value="{$val['aid']}"></td>
-                                        <td><a href="{:U('index')}?sid={$val['sid']}" title="{$val['name']}">{$val['name']}</a>
+                                        <td><a href="{:U('index',array('sid'=>$val['sid']))}" title="{$val['name']}">{$val['name']}</a>
                                         </td>
                                         <td>{$val['title']}</td>
                                         <td>{$val['t']|date="Y-m-d H:i:s",###}</td>
-                                        <td><a href="{:U(edit)}?aid={$val['aid']}"><i
+                                        <td><a href="{:U('edit',array('aid'=>{$val['aid']))}"><i
                                                 class="ace-icon fa fa-pencil bigger-100"></i>修改</a>&nbsp&nbsp;<a
-                                                href="javascript:;" val="{:U('del')}?aids={$val['aid']}" class="del"><i
+                                                href="javascript:;" val="{:U('del',array('aids'=>$val['aid']))}" class="del"><i
                                                 class="ace-icon fa fa-trash-o bigger-100 red"></i>删除</a></td>
                                     </tr>
                                 </volist>

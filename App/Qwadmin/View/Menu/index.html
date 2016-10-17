@@ -57,8 +57,8 @@
                                                 </if>
                                             </td>
                                             <td>{$val['o']}</td>
-                                            <td class="center"><a href="{:U('edit')}?id={$val['id']}">修改</a>&nbsp;<a
-                                                    class="del" href="javascript:;" val="{:U('del')}?ids={$val['id']}"
+                                            <td class="center"><a href="{:U('edit',array('id'=>$val['id']))}">修改</a>&nbsp;<a
+                                                    class="del" href="javascript:;" val="{:U('del',array('ids'=>$val['id']))}"
                                                     title="删除">删除</a></td>
                                         </tr>
                                         <notempty name="val.children">
@@ -78,9 +78,9 @@
                                                         </if>
                                                     </td>
                                                     <td>{$v['o']}</td>
-                                                    <td class="center"><a href="{:U('edit')}?id={$v['id']}">修改</a>&nbsp;<a
+                                                    <td class="center"><a href="{:U('edit',array('id'=>$v['id']))}">修改</a>&nbsp;<a
                                                             class="del" href="javascript:;"
-                                                            val="{:U('del')}?ids={$v['id']}" title="删除">删除</a></td>
+                                                            val="{:U('del',array('ids'=>$v['id']))}" title="删除">删除</a></td>
                                                 </tr>
                                                 <notempty name="v.children">
                                                     <volist name="v.children" id="vv">
@@ -100,9 +100,9 @@
                                                             </td>
                                                             <td>{$vv['o']}</td>
                                                             <td class="center"><a
-                                                                    href="{:U('edit')}?id={$vv['id']}">修改</a>&nbsp;<a
+                                                                    href="{:U('edit',array('id'=>$vv['id']))}">修改</a>&nbsp;<a
                                                                     class="del" href="javascript:;"
-                                                                    val="{:U('del')}?ids={$vv['id']}" title="删除">删除</a>
+                                                                    val="{:U('del',array('ids'=>$vv['id']))}" title="删除">删除</a>
                                                             </td>
                                                         </tr>
                                                     </volist>
