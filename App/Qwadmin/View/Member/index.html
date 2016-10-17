@@ -107,9 +107,9 @@
                                             <td>{$val['phone']}</td>
                                             <td>{$val['qq']}</td>
                                             <td>{$val['email']}</td>
-                                            <td class="center"><a href="{:U('edit')}?uid={$val['uid']}">修改</a>&nbsp;
+                                            <td class="center"><a href="{:U('edit',array('uid'=>$val['uid']))}">修改</a>&nbsp;
                                                 <if condition="$val['uid'] neq 1"><a class="del" href="javascript:;"
-                                                                                     val="{:U('del')}?uids={$val['uid']}"
+                                                                                     val="{:U('del',array('uid'=>$val['uid']))}"
                                                                                      title="删除">删除</a></if>
                                             </td>
                                         </tr>
@@ -187,7 +187,7 @@
             var url = $(this).attr('val');
             bootbox.confirm({
                 title: "系统提示",
-                message: "是否要该用户?",
+                message: "是否要删除该用户?",
                 callback: function (result) {
                     if (result) {
                         window.location.href = url;
