@@ -161,7 +161,7 @@ class MemberController extends ComController
             if (!$password) {
                 $this->error('用户密码不能为空！');
             }
-            if (M('member')->where("user='$user}'")->count()) {
+            if (M('member')->where("user='$user'")->count()) {
                 $this->error('用户名已被占用！');
             }
             $data['user'] = $user;
