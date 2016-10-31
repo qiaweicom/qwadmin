@@ -1,0 +1,36 @@
+{
+    "name": "qiaweicom/qwadmin",
+    "description": "the new cms framework",
+    "type": "project",
+    "authors": [
+        {
+            "name": "kang",
+            "email": "41837647@qq.com"
+        }
+    ],
+    "keywords": [
+        "qwadmin",
+        "framework",
+        "thinkphp",
+        "ORM"
+    ],
+     "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@git.oschina.net:qiawei/qw_thinkphp5.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "qwapp\\": "./"
+        }
+    },
+    
+    "require": {
+        "php": ">=5.4.0",
+        "topthink/thinkphp": "dev-master"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

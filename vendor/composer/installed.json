@@ -1,0 +1,48 @@
+[
+    {
+        "name": "topthink/thinkphp",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "git@git.oschina.net:qiawei/qw_thinkphp5.git",
+            "reference": "2e20524e22ec479e4e1a0eb2e675dcb0c8f542d0"
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "johnkary/phpunit-speedtrap": "^1.0",
+            "mikey179/vfsstream": "~1.6",
+            "phpdocumentor/reflection-docblock": "^2.0",
+            "phploc/phploc": "2.*",
+            "phpunit/phpunit": "4.8.*",
+            "sebastian/phpcpd": "2.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2016-10-31 15:37:11",
+        "type": "think-framework",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "think\\": "library/think"
+            }
+        },
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "liu21st",
+                "email": "liu21st@gmail.com"
+            }
+        ],
+        "description": "the new thinkphp framework",
+        "homepage": "http://thinkphp.cn/",
+        "keywords": [
+            "ORM",
+            "framework",
+            "thinkphp"
+        ]
+    }
+]
