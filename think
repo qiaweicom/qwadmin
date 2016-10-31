@@ -1,14 +1,15 @@
 #!/usr/bin/env php
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: yunwuxin <448901948@qq.com>
-// +----------------------------------------------------------------------
+
+/**
+ * console命令入口文件
+ *
+ * @author 恰维网络 <support@qiawei.com>
+ * @link  http://www.qiawei.com/
+ * @license  ( http://www.apache.org/licenses/LICENSE-2.0 )
+ * @copyright (c) 2006-2016 http://www.qiawei.com All rights reserved.
+ *
+ **/
 
 // 定义项目路径
 define('APP_PATH', __DIR__ . '/application/');
