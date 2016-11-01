@@ -12,13 +12,15 @@
 
 function UpImage($callBack = "image", $width = 100, $height = 100, $image = "")
 {
-    echo '<iframe scrolling="no" frameborder="0" border="0" onload="this.height=this.contentWindow.document.body.scrollHeight;this.width=this.contentWindow.document.body.scrollWidth;" width=' . $width . ' height="' . $height . '"  src="' . U('Upload/uploadpic') . '?Width=' . $width . '&Height=' . $height . '&BackCall=' . $callBack . '&Img=' . $image . '"></iframe>
+    echo '<iframe scrolling="no" frameborder="0" border="0" onload="this.height=this.contentWindow.document.body.scrollHeight;this.width=this.contentWindow.document.body.scrollWidth;" width=' . $width . ' height="' . $height . '"  src="' . U('Upload/uploadpic',
+            array('Width' => $width, 'Height' => $height, 'BackCall' => $callBack, 'Img' => $image)) . '"></iframe>
          <input type="hidden" name="' . $callBack . '" id="' . $callBack . '">';
 }
 
 function BatchImage($callBack = "image", $width = 100, $height = 100, $image = "")
 {
-    echo '<iframe scrolling="no" frameborder="0" border="0" width=100% onload="this.height=this.contentWindow.document.body.scrollHeight;" src="' . U('Upload/batchpic') . '?BackCall=' . $callBack . '&Img=' . $image . '"></iframe>
+    echo '<iframe scrolling="no" frameborder="0" border="0" width=100% onload="this.height=this.contentWindow.document.body.scrollHeight;" src="' . U('Upload/batchpic',
+            array('BackCall' => $callBack, 'Img' => $image)) . '"></iframe>
 		<input type="hidden" name="' . $callBack . '" id="' . $callBack . '">';
 }
 
@@ -165,12 +167,12 @@ function articleUrl($data)
     $categoryUrl = $category['dir'];
     //遍历获取当前文章所在分类的有上级分类并且组合url
     while ($category['pid'] <> 0) {
-        $category =  M('category')->where(array('id' => $category['pid']))->find();
-        $categoryUrl =  $category['dir'] . "/" . $categoryUrl ;
+        $category = M('category')->where(array('id' => $category['pid']))->find();
+        $categoryUrl = $category['dir'] . "/" . $categoryUrl;
         //如果上级分类已经无上级分类则退出
     }
 
-    $categoryUrl = __ROOT__ ."/". $categoryUrl;
+    $categoryUrl = __ROOT__ . "/" . $categoryUrl;
     //组合文章url
     $articleUrl = $categoryUrl . '/' . $aid . ".html";
     return $articleUrl;
