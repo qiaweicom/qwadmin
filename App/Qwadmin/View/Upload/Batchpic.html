@@ -73,14 +73,41 @@
         <input type="hidden" value="{$BackCall}" name="BackCall">
         <input type="hidden" value="{$ImgStr}" name="Img" id="Img">
         <div class="iconbox">
-            <foreach name="Img" item="vo" >
-                <div class="icon"><img class="iconimg" src="{$vo}"><div class="remove">移除</div></div>
-            </foreach>
+            <div class="uplist">
+            </div>
             <a class="file_box">＋<input type="file" name="uploadimg[]" id="uploadicon"  multiple  value="上传"/></a>
         </div>
     </form>
     <br>
     <script type="text/javascript">
+
+        // 移除功能使用
+        function arrange(){
+            var ImgStr="";
+            $("#ht").html('ABC');
+            $('.iconimg').each(function(index){
+                if(index!=0) ImgStr+='|';
+                ImgStr+=$(this).attr('src');
+            });
+            $('#{$BackCall}',parent.document).val(ImgStr);
+            $('#Img').val(ImgStr);
+        }
+        // 根据上级标签设置显示图片
+        function setImg() {
+            // 初始化时从上级调用数值过来 否则从此处设置上级内容
+            if ($('#Img').val()=='') {
+                $('#Img').val($('#{$BackCall}',parent.document).val());
+            }else{
+                $('#{$BackCall}',parent.document).val($('#Img').val());
+            }
+            var imgArray = $('#Img').val().split("|");
+            var divstr='';
+            for (var i = 0;i<imgArray.length;i++) {
+                divstr = divstr + '<div class="icon"><img class="iconimg" src="'+ imgArray[i]+'"><div class="remove">移除</div></div>'
+            }
+            $(".uplist").html(divstr)
+        }
+        setImg();
         $('#uploadicon').on("change",function(){
             arrange();
             $('#PostMe').submit();
@@ -89,22 +116,6 @@
             $(this).parent().remove();
             arrange();
         });
-        function arrange(){
-            var ImgStr="";
-            $("#ht").html('ABC');
-            $('.iconimg').each(function(index){
-                // $(this).hide();
-                // alert($(this).attr('src'));
-                // if(index!=0) $('#ht').append('|');
-                // $('#ht').append($(this).attr('src'));
-                if(index!=0) ImgStr+='|';
-                ImgStr+=$(this).attr('src');
-            });
-            $('#{$BackCall}',parent.document).val(ImgStr);
-            $('#Img').val(ImgStr);
-        }
-
-        $('#{$BackCall}',parent.document).val("{$ImgStr}");
     </script>
 </body>
 

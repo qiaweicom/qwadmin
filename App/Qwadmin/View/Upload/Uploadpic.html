@@ -47,7 +47,14 @@
            $('#PostMe').submit();
 		   //alert('d');
         })
-       $('#{$BackCall}',parent.document).val("{$Img}"); 
+
+		<if condition="$Img eq ''">
+				$("#ImgPr").attr('src',$('#{$BackCall}',parent.document).val());
+		<else />
+				$('#{$BackCall}',parent.document).val("{$Img}");
+		</if>
+
+
     </script>
 </body>
 
