@@ -103,7 +103,10 @@
             var imgArray = $('#Img').val().split("|");
             var divstr='';
             for (var i = 0;i<imgArray.length;i++) {
-                divstr = divstr + '<div class="icon"><img class="iconimg" src="'+ imgArray[i]+'"><div class="remove">移除</div></div>'
+                if(imgArray[i] != "" || typeof(imgArray[i]) == "undefined"){
+                    divstr = divstr + '<div class="icon"><img class="iconimg" src="'+ imgArray[i]+'"><div class="remove">移除</div></div>'
+                }
+
             }
             $(".uplist").html(divstr)
         }
